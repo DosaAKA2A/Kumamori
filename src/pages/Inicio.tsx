@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+import { useSearchParams } from 'react-router'
 import { home, menu } from '../content/site'
 import { LivingImagotipo } from '../brand/Bear'
 import { BrandIcon } from '../brand/Icon'
@@ -43,21 +44,41 @@ const EASE = [0.16, 1, 0.3, 1] as const
 function Hero() {
   const done = useIntroDone()
   const h = home.hero
+  // tres tratamientos del logo sobre foto, comparables con ?logo=borde|crema|pastilla
+  const [params] = useSearchParams()
+  const variante = params.get('logo') ?? 'borde'
   return (
     <section className="on-green relative min-h-[100svh] overflow-hidden bg-bark text-cream">
       <Carousel
         fotos={h.fotos}
         className="absolute inset-0"
-        overlay="linear-gradient(rgba(48,36,29,0.55) 0%, rgba(48,36,29,0.42) 30%, rgba(48,36,29,0.5) 60%, rgba(48,36,29,0.74) 100%)"
+        overlay="linear-gradient(rgba(48,36,29,0.5) 0%, rgba(48,36,29,0.32) 30%, rgba(48,36,29,0.42) 60%, rgba(48,36,29,0.68) 100%)"
       />
+      {variante === 'crema' && (
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{ background: 'radial-gradient(ellipse 44% 40% at 50% 42%, rgba(48,36,29,0.55), transparent 72%)' }}
+          aria-hidden
+        />
+      )}
       <div className="wrap pointer-events-none relative z-10 flex min-h-[100svh] flex-col items-center justify-center gap-7 pb-24 pt-[86px] text-center">
         <motion.div
-          className="pointer-events-auto rounded-[2.75rem] bg-cream px-9 py-7 text-bark shadow-[0_30px_70px_-30px_rgba(48,36,29,0.7)] md:px-12 md:py-9"
+          className={
+            variante === 'pastilla'
+              ? 'pointer-events-auto rounded-[2.75rem] bg-cream px-9 py-7 text-bark shadow-[0_30px_70px_-30px_rgba(48,36,29,0.7)] md:px-12 md:py-9'
+              : 'pointer-events-auto'
+          }
           initial={{ opacity: 0, scale: 0.92, y: 18 }}
           animate={done ? { opacity: 1, scale: 1, y: 0 } : {}}
           transition={{ duration: 1, ease: EASE, delay: 0.1 }}
         >
-          <LivingImagotipo className="h-[min(26svh,250px)] w-auto" title="Kumamori" />
+          {variante === 'crema' ? (
+            <LivingImagotipo className="h-[min(30svh,300px)] w-auto text-cream drop-shadow-[0_10px_36px_rgba(48,36,29,0.55)]" title="Kumamori" />
+          ) : variante === 'pastilla' ? (
+            <LivingImagotipo className="h-[min(26svh,250px)] w-auto" title="Kumamori" />
+          ) : (
+            <LivingImagotipo outline={9} className="h-[min(30svh,300px)] w-auto text-bark drop-shadow-[0_18px_40px_rgba(48,36,29,0.4)]" title="Kumamori" />
+          )}
         </motion.div>
         <motion.p
           className="note max-w-md text-balance text-[1.5rem] leading-tight text-cream [text-shadow:0_2px_18px_rgba(48,36,29,0.75)] md:text-[1.75rem]"

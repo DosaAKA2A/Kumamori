@@ -3,6 +3,7 @@ import { motion, useMotionValue, useMotionValueEvent, useSpring, useTransform, t
 import { bear, imagotipo } from './paths'
 import { outerSubpath, clamp } from './geometry'
 import { pointerX, pointerY, startPointer } from './pointer'
+import clsx from 'clsx'
 
 export type Mood = 'idle' | 'happy' | 'sleepy'
 
@@ -99,21 +100,25 @@ export function Bear({ className, track = true, mood = 'idle', reach = 7, title 
  * El imagotipo completo (oso + クマモリ + KUMAMORI) con los ojos vivos.
  * Es el "LOGO TRANSPARENTE" del hero de la maqueta: se pinta con currentColor.
  */
-export function LivingImagotipo({ className, title }: { className?: string; title?: string }) {
+export function LivingImagotipo({ className, title, outline = 0 }: { className?: string; title?: string; outline?: number }) {
   const ref = useRef<SVGSVGElement>(null)
   // los ojos quedan a ~1/4 de la altura del imagotipo
   const { ex, ey, blink } = useEyes(ref, { reach: 6, unitW: imagotipo.w, centerY: 0.25 })
   const paths = imagotipo.paths // 0-4 oso (3 y 4 son los ojos) · 5-8 katakana · 9-16 letras
+  // contorno crema troquelado detrás de cada forma: la versión del manual para fondos fotográficos
+  const troquel = outline
+    ? { stroke: 'var(--color-cream)', strokeWidth: outline, strokeLinejoin: 'round' as const, strokeLinecap: 'round' as const, paintOrder: 'stroke' as const }
+    : {}
 
   return (
-    <svg ref={ref} viewBox={`0 0 ${imagotipo.w} ${imagotipo.h}`} className={className} fill="currentColor" role={title ? 'img' : undefined} aria-hidden={title ? undefined : true}>
+    <svg ref={ref} viewBox={`0 0 ${imagotipo.w} ${imagotipo.h}`} className={clsx('overflow-visible', className)} fill="currentColor" role={title ? 'img' : undefined} aria-hidden={title ? undefined : true}>
       {title && <title>{title}</title>}
       {paths.map((p, k) =>
-        k === 3 || k === 4 ? null : <path key={k} d={p.d} fillRule={p.eo ? 'evenodd' : undefined} />,
+        k === 3 || k === 4 ? null : <path key={k} d={p.d} fillRule={p.eo ? 'evenodd' : undefined} {...troquel} />,
       )}
       <motion.g style={{ x: ex, y: ey }}>
-        <motion.path d={paths[3].d} style={eyeStyle} animate={{ scaleY: blink ? 0.12 : 1 }} transition={{ duration: 0.12 }} />
-        <motion.path d={paths[4].d} style={eyeStyle} animate={{ scaleY: blink ? 0.12 : 1 }} transition={{ duration: 0.12 }} />
+        <motion.path d={paths[3].d} style={eyeStyle} animate={{ scaleY: blink ? 0.12 : 1 }} transition={{ duration: 0.12 }} {...troquel} />
+        <motion.path d={paths[4].d} style={eyeStyle} animate={{ scaleY: blink ? 0.12 : 1 }} transition={{ duration: 0.12 }} {...troquel} />
       </motion.g>
     </svg>
   )
@@ -123,17 +128,18 @@ export function LivingImagotipo({ className, title }: { className?: string; titl
  * El oso pequeño de la barra de navegación: se llena de matcha a medida que se baja por la página.
  * `progress` va de 0 a 1 (por ejemplo scrollYProgress).
  */
-export function ScrollBear({ progress, className }: { progress: MotionValue<number>; className?: string }) {
+export function ScrollBear({ progress, className, outline = 0 }: { progress: MotionValue<number>; className?: string; outline?: number }) {
   const outer = useMemo(() => outerSubpath(bear.head), [])
   const level = useTransform(progress, [0, 1], [bear.h, 0])
   const id = 'bear-fill-clip'
   return (
-    <svg viewBox={`0 0 ${bear.w} ${bear.h}`} className={className} fill="currentColor" aria-hidden>
+    <svg viewBox={`0 0 ${bear.w} ${bear.h}`} className={clsx('overflow-visible', className)} fill="currentColor" aria-hidden>
       <defs>
         <clipPath id={id}>
           <path d={outer} />
         </clipPath>
       </defs>
+      {outline > 0 && <path d={outer} fill="var(--color-cream)" stroke="var(--color-cream)" strokeWidth={outline} strokeLinejoin="round" />}
       <g clipPath={`url(#${id})`}>
         <motion.rect x={0} y={0} width={bear.w} height={bear.h} style={{ y: level }} fill="var(--color-matcha)" />
       </g>
