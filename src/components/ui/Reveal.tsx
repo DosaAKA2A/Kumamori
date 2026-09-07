@@ -1,5 +1,5 @@
-import { createElement, Fragment, type ReactNode } from 'react'
-import { motion } from 'motion/react'
+import { createElement, Fragment, useRef, type ReactNode } from 'react'
+import { motion, useInView } from 'motion/react'
 import clsx from 'clsx'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -18,6 +18,10 @@ type WordsProps = {
 
 /** Titular que aparece palabra por palabra desde una máscara. */
 export function Words({ text, as = 'h2', className, delay = 0, onView = true, play = true }: WordsProps) {
+  // Se observa el titular entero, no las palabras: dentro de la máscara están recortadas y nunca "entran" en pantalla.
+  const ref = useRef<HTMLElement>(null)
+  const inView = useInView(ref, { once: true, margin: '0px 0px -8% 0px' })
+  const show = onView ? inView : play
   const words = text.split(' ')
   const children = words.map((w, i) => (
     <Fragment key={i}>
@@ -25,9 +29,7 @@ export function Words({ text, as = 'h2', className, delay = 0, onView = true, pl
         <motion.span
           className="inline-block"
           initial={{ y: '112%' }}
-          {...(onView
-            ? { whileInView: { y: 0 }, viewport: { once: true, margin: '0px 0px -8% 0px' } }
-            : { animate: play ? { y: 0 } : { y: '112%' } })}
+          animate={show ? { y: 0 } : { y: '112%' }}
           transition={{ duration: 0.9, ease: EASE, delay: delay + i * 0.045 }}
         >
           {w}
@@ -36,7 +38,7 @@ export function Words({ text, as = 'h2', className, delay = 0, onView = true, pl
       {i < words.length - 1 ? ' ' : null}
     </Fragment>
   ))
-  return createElement(as, { className, 'aria-label': text }, children)
+  return createElement(as, { ref, className, 'aria-label': text }, children)
 }
 
 type LinesProps = {

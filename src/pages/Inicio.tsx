@@ -37,7 +37,7 @@ function Hero() {
 
   return (
     <section ref={ref} className="on-green relative overflow-hidden bg-matcha-deep text-cream">
-      <div className="wrap relative grid min-h-[100svh] content-start pb-[46svh] pt-[7.5rem] sm:pb-[38svh] md:grid-cols-12 md:pb-[11rem] md:pt-[9rem] lg:pt-[10rem]">
+      <div className="wrap relative grid min-h-[100svh] content-start pt-[7.5rem] md:grid-cols-12 md:pb-[11rem] md:pt-[9rem] lg:pt-[10rem]">
         <motion.div style={{ y: textY, opacity: textO }} className="relative z-10 md:col-span-8 lg:col-span-7">
           <Lines lines={h.lineas} className="display t-hero" play={done} />
           <motion.div initial={{ opacity: 0, y: 24 }} animate={done ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.9, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}>
@@ -56,7 +56,7 @@ function Hero() {
 
         <motion.div
           style={{ y: bearY }}
-          className="pointer-events-none absolute bottom-0 right-[-22%] w-[128%] translate-y-[30%] sm:right-[-8%] sm:w-[80%] md:right-[-5%] md:w-[54%] lg:w-[47%]"
+          className="pointer-events-none relative -mb-[26%] ml-auto mt-4 w-[118%] max-w-none translate-x-[8%] sm:w-[80%] sm:translate-x-0 md:absolute md:bottom-0 md:right-[-5%] md:m-0 md:w-[54%] md:translate-y-[30%] lg:w-[47%]"
         >
           <Bear className="w-full text-cream" mood={mood} reach={8} title="El oso de Kumamori" />
         </motion.div>

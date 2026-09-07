@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { Suspense, useEffect, useRef } from 'react'
 import { useLocation, useOutlet } from 'react-router'
 import { AnimatePresence, MotionConfig, motion } from 'motion/react'
 import { ReactLenis, type LenisRef } from 'lenis/react'
@@ -47,7 +47,7 @@ export function Layout() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.22 }}
               >
-                {outlet}
+                <Suspense fallback={<div className="min-h-[100svh] bg-cream" aria-hidden />}>{outlet}</Suspense>
               </motion.main>
             </AnimatePresence>
             <Footer />
