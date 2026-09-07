@@ -125,7 +125,12 @@ button { font: inherit; color: inherit; }
 .input:focus { outline: none; border-color: var(--color-matcha-deep); background: #fff; }
 .input[aria-invalid="true"] { border-color: #b0522d; }
 
+/* ---------- Cinta separadora ---------- */
+@keyframes cinta { to { transform: translateX(-50%); } }
+.cinta-track { animation: cinta 150s linear infinite; }
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
+  .cinta-track { animation: none; }
   html { scroll-behavior: auto; }
 }

@@ -4,6 +4,7 @@ import { LivingImagotipo } from '../brand/Bear'
 import { BrandIcon } from '../brand/Icon'
 import { Words, Fade } from '../components/ui/Reveal'
 import { Watermarks } from '../components/ui/Watermarks'
+import { IconBand } from '../components/ui/IconBand'
 import { Button } from '../components/ui/Button'
 import { DragStrip } from '../components/ui/DragStrip'
 import { Carousel } from '../components/ui/Carousel'
@@ -18,6 +19,7 @@ export function Inicio() {
   return (
     <>
       <Hero />
+      <IconBand />
       <ElEspacio />
       <Barra />
       <Quedarse />
