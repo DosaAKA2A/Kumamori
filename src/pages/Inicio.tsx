@@ -108,7 +108,7 @@ function ElEspacio() {
         </Fade>
         <div className="flex items-center">
           <div className="max-w-xl px-[clamp(1.25rem,5vw,5rem)] py-14 md:py-24">
-            <SectionHead nota={e.nota} titulo={e.titulo} />
+            <SectionHead titulo={e.titulo} />
             {e.parrafos.map((par) => (
               <p key={par.slice(0, 20)} className="lead mt-6 opacity-85">
                 {par}
@@ -133,7 +133,7 @@ function Barra() {
   return (
     <section className="on-green bg-matcha-deep text-cream">
       <div className="wrap pt-20 md:pt-28">
-        <SectionHead nota={b.nota} titulo={b.titulo} texto={b.texto} />
+        <SectionHead titulo={b.titulo} texto={b.texto} />
       </div>
       <div className="wrap">
         <DragStrip className="-mx-[var(--pad)] px-[var(--pad)] pb-20 pt-12 md:pb-28">

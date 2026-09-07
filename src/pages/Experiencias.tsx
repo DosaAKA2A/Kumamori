@@ -22,7 +22,7 @@ export function Experiencias() {
           ]}
         />
         <div className="wrap pt-[8.5rem] md:pt-[11rem]">
-          <SectionHead as="h1" size="t-h1" nota={p.hero.nota} titulo={p.hero.titulo} texto={p.hero.texto} align="center" className="max-w-3xl" />
+          <SectionHead as="h1" size="t-h1" titulo={p.hero.titulo} texto={p.hero.texto} align="center" className="max-w-3xl" />
         </div>
         <div className="wrap grid gap-6 pb-24 pt-24 md:grid-cols-3 md:pb-32 md:pt-28">
           {p.items.map((x) => {

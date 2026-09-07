@@ -14,7 +14,7 @@ export function Reservas() {
         <div className="grid md:min-h-[calc(88svh-76px)] md:grid-cols-12">
           <div className="order-2 flex items-center md:order-1 md:col-span-5">
             <div className="max-w-xl px-[clamp(1.25rem,5vw,5rem)] py-14 md:py-20 md:pl-[clamp(1.25rem,4vw,4rem)] md:pr-12">
-              <SectionHead as="h1" size="t-h2" nota={p.hero.nota} titulo={p.hero.titulo} texto={p.hero.texto} />
+              <SectionHead as="h1" size="t-h2" titulo={p.hero.titulo} texto={p.hero.texto} />
               <div className="mt-9">
                 <Button to={p.cta.boton.to} size="lg">
                   {p.cta.boton.label}

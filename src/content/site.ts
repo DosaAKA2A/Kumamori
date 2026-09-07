@@ -47,7 +47,6 @@ export const home = {
     secundario: { label: 'Conocer el espacio', to: '/espacio' },
   },
   espacio: {
-    nota: 'el espacio',
     titulo: 'Un lugar para quedarse',
     parrafos: [
       'Kumamori es una cafetería inspirada en Japón, pensada para disfrutar, estudiar o trabajar sin mirar el reloj. Abrimos de lunes a sábados, de 7 a 20 h.',
@@ -57,7 +56,6 @@ export const home = {
     foto: { src: 'cafe-ventanas.webp', alt: 'Sala principal de Kumamori con ventanales y luz cálida' },
   },
   barra: {
-    nota: 'desliza para ver más',
     titulo: 'Hoy en la barra',
     texto: 'Lo que sale todos los días. El menú completo cambia con la temporada y está en la barra.',
   },
@@ -143,7 +141,6 @@ export const espacioPage = {
 export const reservasPage = {
   hero: {
     titulo: 'Un lugar con tu nombre',
-    nota: 'sin costo, sin vueltas',
     texto:
       'Eliges el tipo de lugar, el día y la hora, y te lo guardamos hasta 15 minutos después del horario elegido. Si cambian los planes, se cancela desde el mismo código.',
     fotos: [
@@ -199,7 +196,6 @@ export const reservaOpciones = {
 export const experienciasPage = {
   hero: {
     titulo: 'Más que un café',
-    nota: 'tres planes para venir con excusa',
     texto:
       'Pequeños rituales para hacer del rato en Kumamori algo más. Se reservan con anticipación y se suman al lugar que elijas.',
   },
@@ -277,7 +273,6 @@ export const nosotrosPage = {
   cierre: 'El oso cuida el bosque. Nosotros cuidamos cada visita.',
   bocetos: { src: 'bocetos.webp', alt: 'Cuaderno cuadriculado con los primeros bocetos del oso de Kumamori', nota: 'así empezó el oso' },
   merch: {
-    nota: 'la marca anda suelta',
     titulo: 'Kumamori, fuera del local',
     texto: 'Vasos, stickers y todo lo que se va con la gente. Está en la barra, junto a la caja.',
     items: [

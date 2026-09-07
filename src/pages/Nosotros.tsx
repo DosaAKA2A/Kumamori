@@ -88,7 +88,7 @@ export function Nosotros() {
 
       <section className="bg-cream text-bark">
         <div className="wrap pt-20 md:pt-28">
-          <SectionHead nota={p.merch.nota} titulo={p.merch.titulo} texto={p.merch.texto} />
+          <SectionHead titulo={p.merch.titulo} texto={p.merch.texto} />
         </div>
         <div className="wrap">
           <DragStrip className="-mx-[var(--pad)] px-[var(--pad)] pb-20 pt-12 md:pb-24" gap="gap-7">
