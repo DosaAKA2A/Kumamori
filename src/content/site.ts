@@ -35,20 +35,26 @@ export const nav = [
 
 export const home = {
   hero: {
-    lineas: ['Un lugar', 'para', 'quedarse.'],
+    // el hero de la maqueta: FONDO CARRUSEL + LOGO TRANSPARENTE encima
+    fotos: [
+      { src: 'cafe-shoji.webp', alt: 'Interior de Kumamori con luz de tarde entrando por las ventanas de madera' },
+      { src: 'cafe-mesas.webp', alt: 'Mesas de madera junto a la ventana con plantas' },
+      { src: 'bandeja-latte.webp', alt: 'Bandeja de madera con un latte y una porción de torta al sol' },
+      { src: 'cafe-ventanas.webp', alt: 'Sala principal con ventanales y luz cálida' },
+    ],
     nota: 'café de especialidad, matcha batido a mano y silencio del bueno',
-    texto:
-      'Kumamori es una cafetería inspirada en Japón, pensada para disfrutar, estudiar o trabajar sin mirar el reloj. Abrimos de lunes a sábados, de 7 a 20 h.',
     primario: { label: 'Reservar un lugar', to: '/reservas/nueva' },
     secundario: { label: 'Conocer el espacio', to: '/espacio' },
   },
   espacio: {
     nota: 'el espacio',
-    titulo: 'Luz de tarde, enchufes y música baja.',
-    texto:
+    titulo: 'Un lugar para quedarse.',
+    parrafos: [
+      'Kumamori es una cafetería inspirada en Japón, pensada para disfrutar, estudiar o trabajar sin mirar el reloj. Abrimos de lunes a sábados, de 7 a 20 h.',
       'Mesas de estudio con lámpara propia, una mesa grande para trabajar en equipo y un rincón de sillones para cuando el plan es no hacer nada. Wifi de fibra, tomacorrientes en cada mesa y sin límite de tiempo.',
+    ],
     link: { label: 'Ver el espacio', to: '/espacio' },
-    foto: { src: 'cafe-shoji.webp', alt: 'Interior de Kumamori con luz de tarde entrando por las ventanas de madera' },
+    foto: { src: 'cafe-ventanas.webp', alt: 'Sala principal de Kumamori con ventanales y luz cálida' },
   },
   barra: {
     nota: 'desliza para ver más',
@@ -62,8 +68,13 @@ export const home = {
       { titulo: 'Wifi y enchufe', texto: 'Fibra estable y tomacorriente en cada mesa.' },
       { titulo: 'Sin límite de tiempo', texto: 'Una bebida alcanza. Nadie mira el reloj.' },
     ],
-    cta: { label: 'Reservar un lugar', to: '/reservas/nueva' },
     foto: { src: 'bandeja-latte.webp', alt: 'Bandeja de madera con un latte y una porción de torta al sol' },
+  },
+  cta: {
+    titulo: 'Tu lugar te espera.',
+    texto: 'Reservar no tiene costo y te lo guardamos 15 minutos.',
+    boton: { label: 'Reservar un lugar', to: '/reservas/nueva' },
+    foto: 'latte-textura-2.webp',
   },
 }
 
@@ -82,7 +93,6 @@ export const menu: MenuItem[] = [
 export const espacioPage = {
   hero: {
     titulo: 'Para concentrarse, para disfrutar.',
-    nota: 'arrastra las fotos',
     texto:
       'Un lugar cálido y tranquilo, con inspiración japonesa y sin apuro. Mesas grandes para estudiar, rincones para trabajar y una barra donde el matcha se bate a mano.',
     fotos: [
@@ -113,6 +123,7 @@ export const espacioPage = {
     },
   ],
   serviciosTitulo: 'Lo que siempre está.',
+  serviciosFoto: 'cafe-ventanas.webp',
   servicios: [
     { icono: 'wifi', titulo: 'Wifi de fibra', texto: 'Estable para videollamadas y subir entregas.' },
     { icono: 'plug', titulo: 'Enchufe en cada mesa', texto: 'Con adaptadores en la barra si te falta uno.' },
@@ -125,6 +136,7 @@ export const espacioPage = {
     titulo: 'Tu lugar te espera.',
     texto: 'Reservar no tiene costo y te lo guardamos 15 minutos.',
     boton: { label: 'Reservar un lugar', to: '/reservas/nueva' },
+    foto: 'latte-textura-1.webp',
   },
 }
 
@@ -134,17 +146,22 @@ export const reservasPage = {
     nota: 'sin costo, sin vueltas',
     texto:
       'Eliges el tipo de lugar, el día y la hora, y te lo guardamos hasta 15 minutos después del horario elegido. Si cambian los planes, se cancela desde el mismo código.',
-    foto: { src: 'cafe-mesas.webp', alt: 'Mesa reservada junto a la ventana' },
+    fotos: [
+      { src: 'cafe-mesas.webp', alt: 'Mesa reservada junto a la ventana' },
+      { src: 'bandeja-latte.webp', alt: 'Bandeja con un latte y una porción de torta' },
+      { src: 'cafe-shoji.webp', alt: 'Rincón de sillones junto a las puertas shoji' },
+    ],
   },
   pasos: [
     { titulo: 'Elige el lugar', texto: 'Mesa de estudio, la mesa grande o el rincón.' },
     { titulo: 'Elige día y hora', texto: 'Cualquier día de lunes a sábados, entre las 8 y las 19 h.' },
-    { titulo: 'Recibe tu código', texto: 'En pantalla y en tu correo. Se muestra al llegar.' },
+    { titulo: 'Recibe tu código', texto: 'En pantalla, listo para tu calendario. Se muestra al llegar.' },
   ],
   cta: {
     titulo: 'Tu mesa te espera.',
     texto: 'Toma menos de un minuto.',
     boton: { label: 'Reservar ahora', to: '/reservas/nueva' },
+    foto: 'bandeja-latte.webp',
   },
 }
 
@@ -194,6 +211,7 @@ export const experienciasPage = {
       texto:
         'Bloques de tres horas en las mesas de estudio, con lámpara propia, enchufe y una bebida caliente incluida. Ideal para rendir, escribir o simplemente concentrarse.',
       icono: 'sprig',
+      foto: 'cafe-mesas.webp',
       incluye: [
         { icono: 'teacup', label: 'Bebida caliente' },
         { icono: 'sprig', label: 'Mesa con lámpara' },
@@ -213,6 +231,7 @@ export const experienciasPage = {
       texto:
         'Una pausa de veinte minutos para preparar matcha como se hace en Japón: chawan, chasen y agua a la temperatura justa. Sale con un dulce de temporada.',
       icono: 'chasen',
+      foto: 'latte-textura-1.webp',
       incluye: [
         { icono: 'chasen', label: 'Chasen de bambú' },
         { icono: 'chashaku', label: 'Chashaku' },
@@ -232,6 +251,7 @@ export const experienciasPage = {
       texto:
         'Una bandeja para dos o cuatro con dango tricolor, taiyaki relleno, mochis y una tetera. Pensada para la tarde larga con amigos.',
       icono: 'dango',
+      foto: 'bandeja-latte.webp',
       incluye: [
         { icono: 'dango', label: 'Dango tricolor' },
         { icono: 'tin', label: 'Taiyaki relleno' },
@@ -256,6 +276,23 @@ export const nosotrosPage = {
   ],
   cierre: 'El oso cuida el bosque. Nosotros cuidamos cada visita.',
   bocetos: { src: 'bocetos.webp', alt: 'Cuaderno cuadriculado con los primeros bocetos del oso de Kumamori', nota: 'así empezó el oso' },
+  merch: {
+    nota: 'la marca anda suelta',
+    titulo: 'Kumamori, fuera del local.',
+    texto: 'Vasos, stickers y todo lo que se va con la gente. Está en la barra, junto a la caja.',
+    items: [
+      { src: 'vasos.webp', cap: 'para llevar' },
+      { src: 'stickers.webp', cap: 'stickers de la casa' },
+      { src: 'tumbler.webp', cap: 'el tumbler' },
+      { src: 'tote.webp', cap: 'la tote' },
+      { src: 'bolsa.webp', cap: 'la bolsa de papel' },
+      { src: 'cuaderno.webp', cap: 'cuaderno de notas' },
+      { src: 'bubble-tea-vaso.webp', cap: 'bubble tea' },
+      { src: 'cold-brew.webp', cap: 'cold brew' },
+      { src: 'menu-impreso.webp', cap: 'el menú' },
+      { src: 'poster-bubble-tea.webp', cap: 'el póster' },
+    ],
+  },
   redesTitulo: 'Seguinos de cerca.',
 }
 

@@ -1,27 +1,29 @@
 import { reservasPage as p } from '../content/site'
 import { SectionHead } from '../components/ui/Section'
-import { Fade, Words } from '../components/ui/Reveal'
+import { Carousel } from '../components/ui/Carousel'
+import { PhotoBand } from '../components/ui/PhotoBand'
+import { Words } from '../components/ui/Reveal'
 import { Button } from '../components/ui/Button'
-import { photo } from '../lib/hooks'
 
 export function Reservas() {
   return (
     <>
-      <section className="bg-cream text-bark">
-        <div className="wrap grid gap-12 pb-16 pt-[8.5rem] md:grid-cols-12 md:items-center md:pb-24 md:pt-[11rem]">
-          <div className="md:col-span-6">
-            <SectionHead as="h1" size="t-h1" nota={p.hero.nota} titulo={p.hero.titulo} texto={p.hero.texto} />
-            <div className="mt-9">
-              <Button to={p.cta.boton.to} size="lg">
-                {p.cta.boton.label}
-              </Button>
+      {/* hero de la maqueta: texto a la izquierda, FONDO CARRUSEL a sangre a la derecha */}
+      <section className="bg-cream pt-[76px] text-bark">
+        <div className="grid md:min-h-[calc(88svh-76px)] md:grid-cols-12">
+          <div className="order-2 flex items-center md:order-1 md:col-span-5">
+            <div className="max-w-2xl px-[clamp(1.25rem,5vw,5rem)] py-14 md:py-20">
+              <SectionHead as="h1" size="t-h1" nota={p.hero.nota} titulo={p.hero.titulo} texto={p.hero.texto} />
+              <div className="mt-9">
+                <Button to={p.cta.boton.to} size="lg">
+                  {p.cta.boton.label}
+                </Button>
+              </div>
             </div>
           </div>
-          <Fade className="md:col-span-6 lg:col-span-5 lg:col-start-8">
-            <div className="sticker rotate-2 transition-transform duration-700 ease-[var(--ease-expo)] hover:rotate-0">
-              <img src={photo(p.hero.foto.src)} alt={p.hero.foto.alt} width={1800} height={1200} />
-            </div>
-          </Fade>
+          <div className="order-1 md:order-2 md:col-span-7">
+            <Carousel fotos={p.hero.fotos} className="h-[46svh] w-full md:h-full md:rounded-bl-[3rem]" />
+          </div>
         </div>
       </section>
 
@@ -41,17 +43,17 @@ export function Reservas() {
         </div>
       </section>
 
-      <section className="on-green bg-matcha-deep text-cream">
-        <div className="wrap py-24 text-center md:py-36">
-          <Words text={p.cta.titulo} className="display t-h2" />
-          <p className="lead mx-auto mt-5 max-w-lg text-cream/85">{p.cta.texto}</p>
+      <PhotoBand src={p.cta.foto} overlay="linear-gradient(rgba(48,36,29,0.5), rgba(48,36,29,0.72))" className="on-bark text-cream">
+        <div className="wrap py-28 text-center md:py-44">
+          <Words text={p.cta.titulo} className="display t-h1" />
+          <p className="lead mx-auto mt-5 max-w-lg text-cream/90">{p.cta.texto}</p>
           <div className="mt-9">
             <Button to={p.cta.boton.to} size="lg">
               {p.cta.boton.label}
             </Button>
           </div>
         </div>
-      </section>
+      </PhotoBand>
     </>
   )
 }

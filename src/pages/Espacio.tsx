@@ -1,7 +1,8 @@
 import { Clock, Coffee, Infinity as InfinityIcon, Plug, Volume1, Wifi, type LucideIcon } from 'lucide-react'
 import { espacioPage as p } from '../content/site'
 import { SectionHead } from '../components/ui/Section'
-import { StickerStack } from '../components/ui/StickerStack'
+import { Carousel } from '../components/ui/Carousel'
+import { PhotoBand } from '../components/ui/PhotoBand'
 import { Fade, Words } from '../components/ui/Reveal'
 import { Button } from '../components/ui/Button'
 import { photo } from '../lib/hooks'
@@ -11,14 +12,19 @@ const ICONOS: Record<string, LucideIcon> = { wifi: Wifi, plug: Plug, volume: Vol
 export function Espacio() {
   return (
     <>
-      <section className="bg-cream text-bark">
-        <div className="wrap grid gap-12 pb-16 pt-[8.5rem] md:grid-cols-12 md:items-center md:pb-24 md:pt-[11rem]">
-          <div className="md:col-span-6">
-            <SectionHead as="h1" size="t-h1" titulo={p.hero.titulo} texto={p.hero.texto} />
+      {/* hero de la maqueta: texto a la izquierda, FONDO CARRUSEL a sangre a la derecha */}
+      <section className="bg-cream pt-[76px] text-bark">
+        <div className="grid md:min-h-[calc(100svh-76px)] md:grid-cols-12">
+          <div className="order-2 flex items-center md:order-1 md:col-span-5">
+            <div className="max-w-2xl px-[clamp(1.25rem,5vw,5rem)] py-14 md:py-20">
+              <SectionHead as="h1" size="t-h1" titulo={p.hero.titulo} texto={p.hero.texto} />
+              <div className="mt-9">
+                <Button to={p.cta.boton.to}>{p.cta.boton.label}</Button>
+              </div>
+            </div>
           </div>
-          <div className="md:col-span-6 lg:col-span-5 lg:col-start-8">
-            <StickerStack fotos={p.hero.fotos} className="rounded-sticker" />
-            <p className="note mt-5 text-center text-2xl text-matcha">{p.hero.nota}</p>
+          <div className="order-1 md:order-2 md:col-span-7">
+            <Carousel fotos={p.hero.fotos} className="h-[46svh] w-full md:h-full md:rounded-bl-[3rem]" />
           </div>
         </div>
       </section>
@@ -59,17 +65,22 @@ export function Espacio() {
         </div>
       </section>
 
-      <section className="on-green bg-matcha-deep text-cream">
-        <div className="wrap grid gap-12 py-20 md:grid-cols-12 md:py-28">
+      <PhotoBand
+        src={p.serviciosFoto}
+        overlay="linear-gradient(100deg, rgba(87,97,45,0.94) 25%, rgba(87,97,45,0.78))"
+        className="on-green text-cream"
+      >
+        <div className="wrap grid gap-12 py-24 md:grid-cols-12 md:py-32">
           <div className="md:col-span-4">
             <SectionHead titulo={p.serviciosTitulo} />
+            <p className="lead mt-6 max-w-sm text-cream/85">Venir sin plan también cuenta. Esto está siempre, sin pedirlo.</p>
           </div>
           <ul className="grid gap-x-8 gap-y-10 sm:grid-cols-2 md:col-span-8 lg:grid-cols-3">
             {p.servicios.map((s) => {
               const I = ICONOS[s.icono]
               return (
                 <li key={s.titulo} className="flex gap-4">
-                  <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-cream/12 text-cream">
+                  <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-cream/15 text-cream">
                     <I strokeWidth={2} />
                   </span>
                   <div>
@@ -81,19 +92,19 @@ export function Espacio() {
             })}
           </ul>
         </div>
-      </section>
+      </PhotoBand>
 
-      <section className="bg-cream text-bark">
-        <div className="wrap py-24 text-center md:py-36">
-          <Words text={p.cta.titulo} className="display t-h2" />
-          <p className="lead mx-auto mt-5 max-w-lg opacity-85">{p.cta.texto}</p>
+      <PhotoBand src={p.cta.foto} overlay="linear-gradient(rgba(48,36,29,0.45), rgba(48,36,29,0.72))" className="on-bark text-cream">
+        <div className="wrap py-28 text-center md:py-44">
+          <Words text={p.cta.titulo} className="display t-h1" />
+          <p className="lead mx-auto mt-5 max-w-lg text-cream/90">{p.cta.texto}</p>
           <div className="mt-9">
             <Button to={p.cta.boton.to} size="lg">
               {p.cta.boton.label}
             </Button>
           </div>
         </div>
-      </section>
+      </PhotoBand>
     </>
   )
 }

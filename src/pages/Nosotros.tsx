@@ -5,6 +5,8 @@ import { useGSAP } from '@gsap/react'
 import { motion } from 'motion/react'
 import { nosotrosPage as p, site } from '../content/site'
 import { Words } from '../components/ui/Reveal'
+import { DragStrip } from '../components/ui/DragStrip'
+import { SectionHead } from '../components/ui/Section'
 import { photo } from '../lib/hooks'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
@@ -80,6 +82,25 @@ export function Nosotros() {
               El oso salió de un cuaderno cuadriculado: docenas de caras hasta dar con la que mira de frente, tranquila. Del mismo cuaderno salieron クマモリ y 熊森.
             </p>
           </div>
+        </div>
+      </section>
+
+      <section className="bg-cream text-bark">
+        <div className="wrap pt-20 md:pt-28">
+          <SectionHead nota={p.merch.nota} titulo={p.merch.titulo} texto={p.merch.texto} />
+        </div>
+        <div className="wrap">
+          <DragStrip className="-mx-[var(--pad)] px-[var(--pad)] pb-20 pt-12 md:pb-24" gap="gap-7">
+            {p.merch.items.map((m) => (
+              <figure key={m.src} tabIndex={0} className="w-[260px] shrink-0 md:w-[300px]">
+                <div className="sticker">
+                  <img src={photo(m.src)} alt={m.cap} loading="lazy" className="aspect-square object-cover" />
+                </div>
+                <figcaption className="note mt-3 text-center text-xl text-matcha-deep">{m.cap}</figcaption>
+              </figure>
+            ))}
+            <div className="w-[var(--pad)] shrink-0" aria-hidden />
+          </DragStrip>
         </div>
       </section>
 

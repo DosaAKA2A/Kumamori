@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import clsx from 'clsx'
 import { experienciasPage as p } from '../content/site'
+import { photo } from '../lib/hooks'
 import { BrandIcon } from '../brand/Icon'
 import { SectionHead } from '../components/ui/Section'
 import { Button } from '../components/ui/Button'
@@ -25,8 +26,11 @@ export function Experiencias() {
                 className="on-green relative flex flex-col rounded-sticker bg-matcha-deep p-7 pt-20 text-cream"
                 transition={{ layout: { type: 'spring', stiffness: 260, damping: 30 } }}
               >
-                <motion.div layout="position" className="absolute -top-12 left-7 grid h-28 w-28 place-items-center rounded-full bg-matcha text-bark ring-[10px] ring-cream" aria-hidden>
-                  <BrandIcon name={x.icono} className="h-16 w-16" />
+                <motion.div layout="position" className="absolute -top-12 left-7 h-28 w-28 rounded-full ring-[10px] ring-cream" aria-hidden>
+                  <img src={photo(x.foto)} alt="" className="h-full w-full rounded-full object-cover" loading="lazy" />
+                  <span className="absolute -bottom-1 -right-2 grid h-12 w-12 place-items-center rounded-full bg-matcha text-bark ring-4 ring-cream">
+                    <BrandIcon name={x.icono} className="h-7 w-7" />
+                  </span>
                 </motion.div>
                 <motion.div layout="position">
                   <h2 className="t-h3">{x.nombre}</h2>

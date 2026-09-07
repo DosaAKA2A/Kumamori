@@ -1,29 +1,18 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type RefObject } from 'react'
 import { motion, useMotionValue, useMotionValueEvent, useSpring, useTransform, type MotionValue } from 'motion/react'
-import { bear } from './paths'
+import { bear, imagotipo } from './paths'
 import { outerSubpath, clamp } from './geometry'
 import { pointerX, pointerY, startPointer } from './pointer'
 
 export type Mood = 'idle' | 'happy' | 'sleepy'
 
-type BearProps = {
-  className?: string
-  /** los ojos siguen al puntero */
-  track?: boolean
-  mood?: Mood
-  /** cuánto pueden moverse los ojos, en unidades del viewBox (229 x 146) */
-  reach?: number
-  title?: string
-}
-
 const eyeStyle = { transformBox: 'fill-box', transformOrigin: 'center' } as const
 
-/**
- * El oso del isotipo, con los ojos como capas independientes: siguen al puntero y parpadean.
- * Se pinta con currentColor, así que el color lo decide el contexto (crema sobre verde, corteza sobre crema...).
- */
-export function Bear({ className, track = true, mood = 'idle', reach = 7, title }: BearProps) {
-  const ref = useRef<SVGSVGElement>(null)
+/** Ojos que siguen al puntero y parpadean. `unitW` es el ancho del viewBox y `centerY` la altura de la mirada (0-1). */
+function useEyes(
+  ref: RefObject<SVGSVGElement | null>,
+  { track = true, reach = 7, unitW, centerY = 0.52 }: { track?: boolean; reach?: number; unitW: number; centerY?: number },
+) {
   const tx = useMotionValue(0)
   const ty = useMotionValue(0)
   const ex = useSpring(tx, { stiffness: 120, damping: 14, mass: 0.6 })
@@ -40,12 +29,11 @@ export function Bear({ className, track = true, mood = 'idle', reach = 7, title 
     const r = ref.current.getBoundingClientRect()
     if (r.width === 0) return
     const cx = r.left + r.width * 0.5
-    const cy = r.top + r.height * 0.52
-    const dx = px - cx, dy = py - cy
-    const unit = r.width / bear.w // px por unidad de viewBox
+    const cy = r.top + r.height * centerY
+    const unit = r.width / unitW // px por unidad de viewBox
     const k = 0.08 // cuánto responde a la distancia
-    tx.set(clamp((dx / unit) * k, -reach, reach))
-    ty.set(clamp((dy / unit) * k, -reach * 0.8, reach * 0.8))
+    tx.set(clamp(((px - cx) / unit) * k, -reach, reach))
+    ty.set(clamp(((py - cy) / unit) * k, -reach * 0.8, reach * 0.8))
   }
   useMotionValueEvent(pointerX, 'change', follow)
   useMotionValueEvent(pointerY, 'change', follow)
@@ -54,16 +42,41 @@ export function Bear({ className, track = true, mood = 'idle', reach = 7, title 
   const [blink, setBlink] = useState(false)
   useEffect(() => {
     let t: number
+    let t2: number
     const loop = () => {
       t = window.setTimeout(() => {
         setBlink(true)
-        window.setTimeout(() => setBlink(false), 140)
+        t2 = window.setTimeout(() => setBlink(false), 140)
         loop()
       }, 2600 + Math.random() * 3200)
     }
     loop()
-    return () => clearTimeout(t)
+    return () => {
+      clearTimeout(t)
+      clearTimeout(t2)
+    }
   }, [])
+
+  return { ex, ey, blink }
+}
+
+type BearProps = {
+  className?: string
+  /** los ojos siguen al puntero */
+  track?: boolean
+  mood?: Mood
+  /** cuánto pueden moverse los ojos, en unidades del viewBox (229 x 146) */
+  reach?: number
+  title?: string
+}
+
+/**
+ * El oso del isotipo, con los ojos como capas independientes: siguen al puntero y parpadean.
+ * Se pinta con currentColor, así que el color lo decide el contexto.
+ */
+export function Bear({ className, track = true, mood = 'idle', reach = 7, title }: BearProps) {
+  const ref = useRef<SVGSVGElement>(null)
+  const { ex, ey, blink } = useEyes(ref, { track, reach, unitW: bear.w, centerY: 0.52 })
 
   const eyeScaleY = blink ? 0.12 : mood === 'happy' ? 0.35 : mood === 'sleepy' ? 0.5 : 1
   const eyeY = mood === 'happy' ? -2 : 0
@@ -77,6 +90,30 @@ export function Bear({ className, track = true, mood = 'idle', reach = 7, title 
       <motion.g style={{ x: ex, y: ey }}>
         <motion.path d={bear.eyeL} style={eyeStyle} animate={{ scaleY: eyeScaleY, y: eyeY }} transition={{ duration: 0.12 }} />
         <motion.path d={bear.eyeR} style={eyeStyle} animate={{ scaleY: eyeScaleY, y: eyeY }} transition={{ duration: 0.12 }} />
+      </motion.g>
+    </svg>
+  )
+}
+
+/**
+ * El imagotipo completo (oso + クマモリ + KUMAMORI) con los ojos vivos.
+ * Es el "LOGO TRANSPARENTE" del hero de la maqueta: se pinta con currentColor.
+ */
+export function LivingImagotipo({ className, title }: { className?: string; title?: string }) {
+  const ref = useRef<SVGSVGElement>(null)
+  // los ojos quedan a ~1/4 de la altura del imagotipo
+  const { ex, ey, blink } = useEyes(ref, { reach: 6, unitW: imagotipo.w, centerY: 0.25 })
+  const paths = imagotipo.paths // 0-4 oso (3 y 4 son los ojos) · 5-8 katakana · 9-16 letras
+
+  return (
+    <svg ref={ref} viewBox={`0 0 ${imagotipo.w} ${imagotipo.h}`} className={className} fill="currentColor" role={title ? 'img' : undefined} aria-hidden={title ? undefined : true}>
+      {title && <title>{title}</title>}
+      {paths.map((p, k) =>
+        k === 3 || k === 4 ? null : <path key={k} d={p.d} fillRule={p.eo ? 'evenodd' : undefined} />,
+      )}
+      <motion.g style={{ x: ex, y: ey }}>
+        <motion.path d={paths[3].d} style={eyeStyle} animate={{ scaleY: blink ? 0.12 : 1 }} transition={{ duration: 0.12 }} />
+        <motion.path d={paths[4].d} style={eyeStyle} animate={{ scaleY: blink ? 0.12 : 1 }} transition={{ duration: 0.12 }} />
       </motion.g>
     </svg>
   )
