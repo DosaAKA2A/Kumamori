@@ -128,7 +128,7 @@ export function LivingImagotipo({ className, title, outline = 0 }: { className?:
  * El oso pequeño de la barra de navegación: se llena de matcha a medida que se baja por la página.
  * `progress` va de 0 a 1 (por ejemplo scrollYProgress).
  */
-export function ScrollBear({ progress, className, outline = 0 }: { progress: MotionValue<number>; className?: string; outline?: number }) {
+export function ScrollBear({ progress, className }: { progress: MotionValue<number>; className?: string }) {
   const outer = useMemo(() => outerSubpath(bear.head), [])
   const level = useTransform(progress, [0, 1], [bear.h, 0])
   const id = 'bear-fill-clip'
@@ -139,7 +139,6 @@ export function ScrollBear({ progress, className, outline = 0 }: { progress: Mot
           <path d={outer} />
         </clipPath>
       </defs>
-      {outline > 0 && <path d={outer} fill="var(--color-cream)" stroke="var(--color-cream)" strokeWidth={outline} strokeLinejoin="round" />}
       <g clipPath={`url(#${id})`}>
         <motion.rect x={0} y={0} width={bear.w} height={bear.h} style={{ y: level }} fill="var(--color-matcha)" />
       </g>

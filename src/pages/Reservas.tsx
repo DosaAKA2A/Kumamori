@@ -3,6 +3,7 @@ import { SectionHead } from '../components/ui/Section'
 import { Carousel } from '../components/ui/Carousel'
 import { PhotoBand } from '../components/ui/PhotoBand'
 import { Words } from '../components/ui/Reveal'
+import { Watermarks } from '../components/ui/Watermarks'
 import { Button } from '../components/ui/Button'
 
 export function Reservas() {
@@ -27,7 +28,13 @@ export function Reservas() {
         </div>
       </section>
 
-      <section className="bg-cream-deep/60 text-bark">
+      <section className="relative bg-cream-deep/60 text-bark">
+        <Watermarks
+          marcas={[
+            { icono: 'clover', className: '-right-8 -top-8 w-48 rotate-12 opacity-[0.07]' },
+            { icono: 'chashaku', className: 'bottom-[6%] left-[2%] w-40 -rotate-6 opacity-[0.06]' },
+          ]}
+        />
         <div className="wrap py-20 md:py-28">
           <ol className="grid gap-6 md:grid-cols-3">
             {p.pasos.map((paso, i) => (

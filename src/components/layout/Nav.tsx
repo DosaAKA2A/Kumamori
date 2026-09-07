@@ -31,17 +31,19 @@ export function Nav() {
       <header
         className={clsx(
           'fixed inset-x-0 top-0 z-[80] transition-[background-color,color,box-shadow] duration-300',
-          scrolled ? 'bg-cream/85 shadow-[0_1px_0_rgba(48,36,29,0.08)] backdrop-blur-md' : 'bg-transparent',
+          scrolled
+            ? 'bg-cream/85 shadow-[0_1px_0_rgba(48,36,29,0.08)] backdrop-blur-md'
+            : onGreen
+              ? 'bg-gradient-to-b from-bark/45 to-transparent'
+              : 'bg-transparent',
           onGreen ? 'on-green text-cream' : 'text-bark',
         )}
       >
         <div className="wrap flex h-[76px] items-center justify-between gap-4">
           <TLink to="/" aria-label="Kumamori, inicio" className="shrink-0 rounded-md">
-            {/* sobre foto, el oso va en marrón con contorno crema troquelado (regla del manual para fondos fotográficos) */}
             <ScrollBear
               progress={scrollYProgress}
-              outline={onGreen ? 10 : 0}
-              className={clsx('h-9 w-auto transition-colors duration-300', onGreen ? 'text-bark drop-shadow-[0_4px_14px_rgba(48,36,29,0.45)]' : 'text-current')}
+              className={clsx('h-9 w-auto transition-colors duration-300', onGreen && 'drop-shadow-[0_2px_10px_rgba(48,36,29,0.65)]')}
             />
           </TLink>
 

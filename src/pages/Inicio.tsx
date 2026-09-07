@@ -3,8 +3,8 @@ import { home, menu } from '../content/site'
 import { LivingImagotipo } from '../brand/Bear'
 import { BrandIcon } from '../brand/Icon'
 import { Words, Fade } from '../components/ui/Reveal'
+import { Watermarks } from '../components/ui/Watermarks'
 import { Button } from '../components/ui/Button'
-import { IconMarquee } from '../components/ui/Marquee'
 import { DragStrip } from '../components/ui/DragStrip'
 import { Carousel } from '../components/ui/Carousel'
 import { PhotoBand } from '../components/ui/PhotoBand'
@@ -18,7 +18,6 @@ export function Inicio() {
   return (
     <>
       <Hero />
-      <IconMarquee className="bg-cream text-matcha-deep" />
       <ElEspacio />
       <Barra />
       <Quedarse />
@@ -87,7 +86,13 @@ function Hero() {
 function ElEspacio() {
   const e = home.espacio
   return (
-    <section className="bg-cream text-bark">
+    <section className="relative bg-cream text-bark">
+      <Watermarks
+        marcas={[
+          { icono: 'cha', className: 'right-[4%] top-[10%] w-36 rotate-6 opacity-[0.06]' },
+          { icono: 'sprig', className: 'bottom-[8%] right-[7%] w-52 -rotate-12 opacity-[0.05]' },
+        ]}
+      />
       <div className="grid md:min-h-[78vh] md:grid-cols-2">
         <Fade className="relative min-h-[48svh] md:min-h-0">
           <img
@@ -153,7 +158,13 @@ function Barra() {
 function Quedarse() {
   const q = home.quedarse
   return (
-    <section className="bg-cream text-bark">
+    <section className="relative bg-cream text-bark">
+      <Watermarks
+        marcas={[
+          { icono: 'teacup', className: '-bottom-6 left-[42%] w-44 rotate-12 opacity-[0.05]' },
+          { icono: 'flower-five', className: 'left-[2%] top-[8%] w-28 -rotate-12 opacity-[0.06]' },
+        ]}
+      />
       <div className="wrap grid items-center gap-12 py-20 md:grid-cols-12 md:py-32">
         <div className="md:col-span-6">
           <Words text={q.titulo} className="display t-h2" />

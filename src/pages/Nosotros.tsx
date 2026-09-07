@@ -7,6 +7,7 @@ import { nosotrosPage as p, site } from '../content/site'
 import { Words } from '../components/ui/Reveal'
 import { DragStrip } from '../components/ui/DragStrip'
 import { SectionHead } from '../components/ui/Section'
+import { Watermarks } from '../components/ui/Watermarks'
 import { photo } from '../lib/hooks'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
@@ -105,7 +106,13 @@ export function Nosotros() {
         </div>
       </section>
 
-      <section className="bg-cream text-bark">
+      <section className="relative bg-cream text-bark">
+        <Watermarks
+          marcas={[
+            { icono: 'flower-hatched', className: 'left-[4%] bottom-[12%] w-36 -rotate-12 opacity-[0.06]' },
+            { icono: 'purin', className: 'right-[5%] top-[14%] w-32 rotate-6 opacity-[0.05]' },
+          ]}
+        />
         <div className="wrap py-20 text-center md:py-28">
           <Words text={p.redesTitulo} className="display t-h2" />
           <ul className="mx-auto mt-12 grid max-w-3xl gap-4 sm:grid-cols-3">

@@ -5,6 +5,7 @@ import { experienciasPage as p } from '../content/site'
 import { photo } from '../lib/hooks'
 import { BrandIcon } from '../brand/Icon'
 import { SectionHead } from '../components/ui/Section'
+import { Watermarks } from '../components/ui/Watermarks'
 import { Button } from '../components/ui/Button'
 
 export function Experiencias() {
@@ -12,7 +13,14 @@ export function Experiencias() {
 
   return (
     <>
-      <section className="bg-cream text-bark">
+      <section className="relative bg-cream text-bark">
+        <Watermarks
+          marcas={[
+            { icono: 'chasen', className: 'left-[5%] top-[12rem] w-32 -rotate-12 opacity-[0.06]' },
+            { icono: 'melonpan', className: 'right-[5%] top-[9rem] w-40 rotate-6 opacity-[0.05]' },
+            { icono: 'dango', className: 'bottom-[4%] left-[3%] w-32 rotate-6 opacity-[0.05]' },
+          ]}
+        />
         <div className="wrap pt-[8.5rem] md:pt-[11rem]">
           <SectionHead as="h1" size="t-h1" nota={p.hero.nota} titulo={p.hero.titulo} texto={p.hero.texto} align="center" className="max-w-3xl" />
         </div>

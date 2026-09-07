@@ -125,13 +125,7 @@ button { font: inherit; color: inherit; }
 .input:focus { outline: none; border-color: var(--color-matcha-deep); background: #fff; }
 .input[aria-invalid="true"] { border-color: #b0522d; }
 
-/* ---------- Marquesina ---------- */
-@keyframes marquee { to { transform: translateX(-50%); } }
-.marquee-track { display: flex; width: max-content; animation: marquee 55s linear infinite; }
-.marquee:hover .marquee-track, .marquee[data-paused="true"] .marquee-track { animation-play-state: paused; }
-
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track { animation: none; }
   html { scroll-behavior: auto; }
 }
