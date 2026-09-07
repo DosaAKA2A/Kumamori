@@ -74,7 +74,7 @@ export function ReservasNueva() {
     <section className="bg-cream text-bark">
       <div className="wrap grid gap-10 pb-12 pt-[8.5rem] md:grid-cols-12 md:items-end md:pt-[11rem]">
         <div className="md:col-span-7">
-          <SectionHead as="h1" size="t-h1" nota="toma menos de un minuto" titulo="Reservar un lugar." texto="Sin costo. Te guardamos el lugar hasta 15 minutos después del horario elegido." />
+          <SectionHead as="h1" size="t-h1" nota="toma menos de un minuto" titulo="Reservar un lugar" texto="Sin costo. Te guardamos el lugar hasta 15 minutos después del horario elegido." />
         </div>
         <div className="hidden md:col-span-4 md:col-start-9 md:block">
           <div className="sticker rotate-2">
@@ -417,7 +417,7 @@ function Confirmacion({ reserva: r, onOtra }: { reserva: Reserva; onOtra: () => 
       <div className="wrap grid gap-12 pb-24 pt-[8.5rem] md:grid-cols-12 md:items-center md:pt-[11rem]">
         <div className="md:col-span-7">
           <p className="note text-2xl text-matcha">listo</p>
-          <Words as="h1" text="Tu lugar está guardado." className="display t-h1 mt-2" onView={false} />
+          <Words as="h1" text="Tu lugar está guardado" className="display t-h1 mt-2" onView={false} />
           <p className="lead mt-6 max-w-xl opacity-85">Muestra este código al llegar. Guárdalo o agrégalo a tu calendario: por ahora no enviamos correos.</p>
           <p className="note mt-6 text-6xl text-matcha-deep md:text-7xl" aria-label={`Código ${r.codigo}`}>
             {r.codigo}

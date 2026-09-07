@@ -8,7 +8,7 @@ export function NotFound() {
       <div className="wrap grid min-h-[80svh] items-center gap-10 pt-[8.5rem] pb-16 md:grid-cols-12">
         <div className="md:col-span-7">
           <p className="note text-2xl text-matcha">404</p>
-          <Words as="h1" text="Esta mesa no existe." className="display t-h1 mt-2" onView={false} />
+          <Words as="h1" text="Esta mesa no existe" className="display t-h1 mt-2" onView={false} />
           <p className="lead mt-6 max-w-lg opacity-85">La página que buscas no está. Puede que el link esté mal escrito o que la hayamos movido.</p>
           <div className="mt-9">
             <Button to="/">Volver al inicio</Button>

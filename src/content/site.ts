@@ -48,7 +48,7 @@ export const home = {
   },
   espacio: {
     nota: 'el espacio',
-    titulo: 'Un lugar para quedarse.',
+    titulo: 'Un lugar para quedarse',
     parrafos: [
       'Kumamori es una cafetería inspirada en Japón, pensada para disfrutar, estudiar o trabajar sin mirar el reloj. Abrimos de lunes a sábados, de 7 a 20 h.',
       'Mesas de estudio con lámpara propia, una mesa grande para trabajar en equipo y un rincón de sillones para cuando el plan es no hacer nada. Wifi de fibra, tomacorrientes en cada mesa y sin límite de tiempo.',
@@ -58,11 +58,11 @@ export const home = {
   },
   barra: {
     nota: 'desliza para ver más',
-    titulo: 'Hoy en la barra.',
+    titulo: 'Hoy en la barra',
     texto: 'Lo que sale todos los días. El menú completo cambia con la temporada y está en la barra.',
   },
   quedarse: {
-    titulo: 'Para quedarse un rato largo.',
+    titulo: 'Para quedarse un rato largo',
     datos: [
       { titulo: 'De 7 a 20 h', texto: 'Lunes a sábados, con el mismo menú toda la tarde.' },
       { titulo: 'Wifi y enchufe', texto: 'Fibra estable y tomacorriente en cada mesa.' },
@@ -71,7 +71,7 @@ export const home = {
     foto: { src: 'bandeja-latte.webp', alt: 'Bandeja de madera con un latte y una porción de torta al sol' },
   },
   cta: {
-    titulo: 'Tu lugar te espera.',
+    titulo: 'Tu lugar te espera',
     texto: 'Reservar no tiene costo y te lo guardamos 15 minutos.',
     boton: { label: 'Reservar un lugar', to: '/reservas/nueva' },
     foto: 'latte-textura-2.webp',
@@ -92,7 +92,7 @@ export const menu: MenuItem[] = [
 
 export const espacioPage = {
   hero: {
-    titulo: 'Para concentrarse, para disfrutar.',
+    titulo: 'Para concentrarse o disfrutar',
     texto:
       'Un lugar cálido y tranquilo, con inspiración japonesa y sin apuro. Mesas grandes para estudiar, rincones para trabajar y una barra donde el matcha se bate a mano.',
     fotos: [
@@ -101,7 +101,7 @@ export const espacioPage = {
       { src: 'cafe-shoji.webp', alt: 'Puertas shoji de madera y un sillón al sol' },
     ],
   },
-  zonasTitulo: 'Tres maneras de quedarse.',
+  zonasTitulo: 'Tres maneras de quedarse',
   zonas: [
     {
       nombre: 'Mesas de estudio',
@@ -122,7 +122,7 @@ export const espacioPage = {
       foto: { src: 'cafe-shoji.webp', alt: 'Rincón de sillones junto a las puertas shoji' },
     },
   ],
-  serviciosTitulo: 'Lo que siempre está.',
+  serviciosTitulo: 'Lo que siempre está',
   serviciosFoto: 'cafe-ventanas.webp',
   servicios: [
     { icono: 'wifi', titulo: 'Wifi de fibra', texto: 'Estable para videollamadas y subir entregas.' },
@@ -133,7 +133,7 @@ export const espacioPage = {
     { icono: 'infinity', titulo: 'Sin límite de tiempo', texto: 'Una bebida alcanza para quedarse.' },
   ],
   cta: {
-    titulo: 'Tu lugar te espera.',
+    titulo: 'Tu lugar te espera',
     texto: 'Reservar no tiene costo y te lo guardamos 15 minutos.',
     boton: { label: 'Reservar un lugar', to: '/reservas/nueva' },
     foto: 'latte-textura-1.webp',
@@ -142,7 +142,7 @@ export const espacioPage = {
 
 export const reservasPage = {
   hero: {
-    titulo: 'Un lugar con tu nombre.',
+    titulo: 'Un lugar con tu nombre',
     nota: 'sin costo, sin vueltas',
     texto:
       'Eliges el tipo de lugar, el día y la hora, y te lo guardamos hasta 15 minutos después del horario elegido. Si cambian los planes, se cancela desde el mismo código.',
@@ -158,7 +158,7 @@ export const reservasPage = {
     { titulo: 'Recibe tu código', texto: 'En pantalla, listo para tu calendario. Se muestra al llegar.' },
   ],
   cta: {
-    titulo: 'Tu mesa te espera.',
+    titulo: 'Tu mesa te espera',
     texto: 'Toma menos de un minuto.',
     boton: { label: 'Reservar ahora', to: '/reservas/nueva' },
     foto: 'bandeja-latte.webp',
@@ -198,7 +198,7 @@ export const reservaOpciones = {
 
 export const experienciasPage = {
   hero: {
-    titulo: 'Más que un café.',
+    titulo: 'Más que un café',
     nota: 'tres planes para venir con excusa',
     texto:
       'Pequeños rituales para hacer del rato en Kumamori algo más. Se reservan con anticipación y se suman al lugar que elijas.',
@@ -268,8 +268,8 @@ export const experienciasPage = {
 }
 
 export const nosotrosPage = {
-  titulo: 'Un oso en el bosque.',
-  sub: 'Kuma es oso. Mori es bosque.',
+  titulo: 'Un oso en el bosque',
+  sub: 'Kuma es oso. Mori es bosque',
   parrafos: [
     'Kumamori nace de una idea simple: faltaban lugares cómodos para estudiar y trabajar fuera de casa, y sobraban ganas de un buen matcha. Así que juntamos las dos cosas en un espacio cálido, tranquilo y con inspiración japonesa.',
     'Queremos que la concentración, el bienestar y el encuentro convivan en la misma mesa. Que se pueda venir a rendir un final, a cerrar un proyecto o a no hacer nada, y que el café siempre esté a la altura.',
@@ -278,22 +278,21 @@ export const nosotrosPage = {
   bocetos: { src: 'bocetos.webp', alt: 'Cuaderno cuadriculado con los primeros bocetos del oso de Kumamori', nota: 'así empezó el oso' },
   merch: {
     nota: 'la marca anda suelta',
-    titulo: 'Kumamori, fuera del local.',
+    titulo: 'Kumamori, fuera del local',
     texto: 'Vasos, stickers y todo lo que se va con la gente. Está en la barra, junto a la caja.',
     items: [
       { src: 'vasos.webp', cap: 'para llevar' },
-      { src: 'stickers.webp', cap: 'stickers de la casa' },
-      { src: 'tumbler.webp', cap: 'el tumbler' },
-      { src: 'tote.webp', cap: 'la tote' },
-      { src: 'bolsa.webp', cap: 'la bolsa de papel' },
+      { src: 'tumbler.webp', cap: 'stickers de la casa' },
       { src: 'cuaderno.webp', cap: 'cuaderno de notas' },
+      { src: 'stickers.webp', cap: 'la bolsa de papel' },
+      { src: 'tote.webp', cap: 'la tote' },
       { src: 'bubble-tea-vaso.webp', cap: 'bubble tea' },
       { src: 'cold-brew.webp', cap: 'cold brew' },
       { src: 'menu-impreso.webp', cap: 'el menú' },
       { src: 'poster-bubble-tea.webp', cap: 'el póster' },
     ],
   },
-  redesTitulo: 'Seguinos de cerca.',
+  redesTitulo: 'Seguinos de cerca',
 }
 
 export const footer = {

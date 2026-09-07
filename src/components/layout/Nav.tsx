@@ -36,11 +36,19 @@ export function Nav() {
         )}
       >
         <div className="wrap flex h-[76px] items-center justify-between gap-4">
-          <TLink to="/" aria-label="Kumamori, inicio" className="shrink-0 rounded-md">
-            <ScrollBear progress={scrollYProgress} className="h-9 w-auto" />
+          <TLink to="/" aria-label="Kumamori, inicio" className="shrink-0 rounded-full">
+            {/* sobre foto, el oso va en su pastilla crema (regla del manual para fondos fotográficos) */}
+            <span
+              className={clsx(
+                'grid h-12 w-12 place-items-center rounded-full transition-colors duration-300',
+                onGreen ? 'bg-cream text-bark shadow-[0_6px_20px_-6px_rgba(48,36,29,0.6)] ring-1 ring-bark/15' : 'bg-transparent text-current',
+              )}
+            >
+              <ScrollBear progress={scrollYProgress} className="h-8 w-auto" />
+            </span>
           </TLink>
 
-          <nav className="hidden items-center gap-1 md:flex" aria-label="Principal">
+          <nav className={clsx('hidden items-center gap-1 md:flex', onGreen && '[text-shadow:0_1px_14px_rgba(48,36,29,0.7)]')} aria-label="Principal">
             {nav.map((l) => {
               const active = esActivo(pathname, l.to)
               return (

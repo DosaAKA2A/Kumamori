@@ -48,19 +48,19 @@ function Hero() {
       <Carousel
         fotos={h.fotos}
         className="absolute inset-0"
-        overlay="linear-gradient(rgba(48,36,29,0.34) 0%, rgba(48,36,29,0.5) 55%, rgba(48,36,29,0.74) 100%)"
+        overlay="linear-gradient(rgba(48,36,29,0.55) 0%, rgba(48,36,29,0.42) 30%, rgba(48,36,29,0.5) 60%, rgba(48,36,29,0.74) 100%)"
       />
       <div className="wrap pointer-events-none relative z-10 flex min-h-[100svh] flex-col items-center justify-center gap-7 pb-24 pt-[86px] text-center">
         <motion.div
-          className="pointer-events-auto"
+          className="pointer-events-auto rounded-[2.75rem] bg-cream px-9 py-7 text-bark shadow-[0_30px_70px_-30px_rgba(48,36,29,0.7)] md:px-12 md:py-9"
           initial={{ opacity: 0, scale: 0.92, y: 18 }}
           animate={done ? { opacity: 1, scale: 1, y: 0 } : {}}
           transition={{ duration: 1, ease: EASE, delay: 0.1 }}
         >
-          <LivingImagotipo className="h-[min(32svh,320px)] w-auto text-cream drop-shadow-[0_10px_40px_rgba(48,36,29,0.35)]" title="Kumamori" />
+          <LivingImagotipo className="h-[min(26svh,250px)] w-auto" title="Kumamori" />
         </motion.div>
         <motion.p
-          className="note max-w-xl text-[1.5rem] leading-tight text-cream md:text-[1.8rem]"
+          className="note max-w-md text-balance text-[1.5rem] leading-tight text-cream [text-shadow:0_2px_18px_rgba(48,36,29,0.75)] md:text-[1.75rem]"
           initial={{ opacity: 0, y: 16 }}
           animate={done ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, ease: EASE, delay: 0.4 }}

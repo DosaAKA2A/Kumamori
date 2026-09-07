@@ -93,8 +93,9 @@ export function Nosotros() {
           <DragStrip className="-mx-[var(--pad)] px-[var(--pad)] pb-20 pt-12 md:pb-24" gap="gap-7">
             {p.merch.items.map((m) => (
               <figure key={m.src} tabIndex={0} className="w-[260px] shrink-0 md:w-[300px]">
-                <div className="sticker">
-                  <img src={photo(m.src)} alt={m.cap} loading="lazy" className="aspect-square object-cover" />
+                <div className="sticker bg-cream-light">
+                  {/* multiply: el fondo blanco del mockup toma el color del papel */}
+                  <img src={photo(m.src)} alt={m.cap} loading="lazy" className="aspect-square object-contain p-3 mix-blend-multiply" />
                 </div>
                 <figcaption className="note mt-3 text-center text-xl text-matcha-deep">{m.cap}</figcaption>
               </figure>
