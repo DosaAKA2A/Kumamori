@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+/* ---------- Tokens de marca (manual Kumamori v1.0) ---------- */
+@theme {
+  --color-matcha-deep: #57612d;
+  --color-matcha: #9daa50;
+  --color-cream: #efe8cc;
+  --color-cream-light: #f7f2de;
+  --color-cream-deep: #e2d8b0;
+  --color-bark: #30241d;
+
+  --font-display: "Red Hat Display Variable", "Red Hat Display", ui-sans-serif, system-ui, sans-serif;
+  --font-hand: "Gaegu", "Segoe Print", cursive;
+  --font-jp: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Noto Sans JP", sans-serif;
+
+  --radius-sticker: 1.75rem;
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-wipe: cubic-bezier(0.83, 0, 0.17, 1);
+}
+
+/* ---------- Base ---------- */
+html {
+  background: var(--color-cream);
+  color: var(--color-bark);
+  scrollbar-color: var(--color-matcha-deep) var(--color-cream);
+  scrollbar-width: thin;
+  -webkit-text-size-adjust: 100%;
+}
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--color-cream); }
+::-webkit-scrollbar-thumb { background: var(--color-matcha-deep); border-radius: 999px; border: 2px solid var(--color-cream); }
+
+body {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+::selection { background: var(--color-matcha); color: var(--color-bark); }
+:focus-visible { outline: 3px solid var(--color-matcha); outline-offset: 3px; border-radius: 6px; }
+img { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; }
+
+/* grano de papel muy sutil, encima de todo */
+.grain {
+  position: fixed; inset: 0; z-index: 120; pointer-events: none; opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 240px;
+}
+
+/* ---------- Layout ---------- */
+.wrap {
+  --pad: clamp(1.25rem, 5vw, 5.5rem);
+  width: min(100% - var(--pad) * 2, 88rem);
+  margin-inline: auto;
+}
+
+/* ---------- Tipografía ---------- */
+.display {
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  line-height: 0.92;
+  text-wrap: balance;
+}
+.t-hero { font-size: clamp(3rem, 8vw, 8rem); }
+.t-h1 { font-size: clamp(2.4rem, 5.2vw, 4.8rem); }
+.t-h2 { font-size: clamp(1.9rem, 3.8vw, 3.4rem); }
+.t-h3 { font-size: clamp(1.35rem, 2vw, 1.7rem); font-weight: 800; letter-spacing: -0.01em; line-height: 1.12; }
+.note { font-family: var(--font-hand); font-weight: 700; line-height: 1.1; }
+.lead { font-size: clamp(1.1rem, 1.45vw, 1.3rem); line-height: 1.5; font-weight: 500; }
+.body { max-width: 62ch; }
+.kanji { font-family: var(--font-jp); font-weight: 700; line-height: 1; }
+
+/* ---------- Botones ---------- */
+:root {
+  --btn-bg: var(--color-matcha-deep);
+  --btn-fg: var(--color-cream);
+  --btn-hover: var(--color-bark);
+}
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+  border-radius: 999px; padding: 1.05rem 1.7rem;
+  font-weight: 700; font-size: 1rem; line-height: 1; text-decoration: none;
+  background: var(--btn-bg); color: var(--btn-fg);
+  border: 2px solid transparent;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+  cursor: pointer; white-space: nowrap;
+  will-change: transform;
+}
+.btn:hover { background: var(--btn-hover); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-sm { padding: 0.8rem 1.25rem; font-size: 0.95rem; }
+.btn-lg { padding: 1.25rem 2.1rem; font-size: 1.1rem; }
+.btn-ghost { background: transparent; color: currentColor; border-color: currentColor; }
+.btn-ghost:hover { background: var(--btn-ghost-hover, rgba(48, 36, 29, 0.08)); }
+.on-green { --btn-bg: var(--color-cream); --btn-fg: var(--color-bark); --btn-hover: var(--color-matcha); --btn-ghost-hover: rgba(239, 232, 204, 0.12); }
+.on-bark { --btn-bg: var(--color-matcha); --btn-fg: var(--color-bark); --btn-hover: var(--color-cream); --btn-ghost-hover: rgba(239, 232, 204, 0.12); }
+
+/* ---------- Sticker (foto con borde troquelado) ---------- */
+.sticker {
+  border-radius: var(--radius-sticker);
+  padding: 0.6rem;
+  background: var(--color-cream-light);
+  box-shadow: 0 1px 0 rgba(48, 36, 29, 0.06), 0 28px 50px -30px rgba(48, 36, 29, 0.45);
+}
+.sticker > img, .sticker > .sticker-media {
+  border-radius: calc(var(--radius-sticker) - 0.6rem);
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+/* ---------- Campos de formulario ---------- */
+.field { display: grid; gap: 0.45rem; }
+.field > span { font-weight: 700; font-size: 0.95rem; }
+.input {
+  width: 100%; border-radius: 1rem; padding: 0.95rem 1.1rem;
+  background: var(--color-cream-light); border: 2px solid var(--color-cream-deep);
+  color: var(--color-bark); font-weight: 500;
+  transition: border-color 0.2s, background 0.2s;
+}
+.input::placeholder { color: rgba(48, 36, 29, 0.45); }
+.input:hover { border-color: var(--color-matcha); }
+.input:focus { outline: none; border-color: var(--color-matcha-deep); background: #fff; }
+.input[aria-invalid="true"] { border-color: #b0522d; }
+
+/* ---------- Marquesina ---------- */
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee-track { display: flex; width: max-content; animation: marquee 55s linear infinite; }
+.marquee:hover .marquee-track, .marquee[data-paused="true"] .marquee-track { animation-play-state: paused; }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  html { scroll-behavior: auto; }
+}
