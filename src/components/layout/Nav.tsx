@@ -110,6 +110,7 @@ function MobileMenu({ onClose, pathname }: { onClose: () => void; pathname: stri
           >
             <TLink
               to={l.to}
+              onClick={onClose}
               aria-current={esActivo(pathname, l.to) ? 'page' : undefined}
               className={clsx('display block py-2.5 text-[2rem]', esActivo(pathname, l.to) ? 'text-matcha' : 'text-cream')}
             >

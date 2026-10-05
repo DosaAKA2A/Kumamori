@@ -552,7 +552,7 @@ function Confirmacion({ reserva: r }: { reserva: Reserva }) {
       <div className="frame wrap-m pb-16 pt-28 dk:uh-1118 dk:p-0">
         {/* trazos de pincel del fondo: aparecen cuando el sello ya cayó */}
         <motion.div
-          className="pointer-events-none absolute right-0 top-0 h-[60%] w-full bg-[#dedcb3] opacity-60 dk:ux-780 dk:uy-110 dk:uw-948 dk:uh-1008 dk:opacity-100"
+          className="pointer-events-none absolute hidden bg-[#dedcb3] dk:block dk:ux-780 dk:uy-110 dk:uw-948 dk:uh-1008 dk:opacity-100"
           style={{ WebkitMaskImage: trazos, maskImage: trazos, WebkitMaskSize: '100% 100%', maskSize: '100% 100%' }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
