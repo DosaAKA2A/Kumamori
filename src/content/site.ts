@@ -213,8 +213,8 @@ export const reservaOpciones = {
 }
 
 export const experienciasPage = {
-  titulo: '¿Qué se puede hacer en Kumamori?',
-  texto: 'Acá tenemos tres experiencias para vos. Un lugar para concentrarte, compartir y disfrutar de un momento tranquilo a tu manera.',
+  titulo: '¿Qué se puede hacer\nen Kumamori?',
+  texto: 'Acá tenemos tres experiencias para vos. Un lugar para concentrarte,\ncompartir y disfrutar de un momento tranquilo a tu manera.',
   verMas: 'Ver más',
   items: [
     {
@@ -237,7 +237,7 @@ export const experienciasPage = {
     },
     {
       id: 'merienda',
-      nombre: 'Merienda  Japonesa',
+      nombre: 'Merienda Japonesa', // la maqueta trae un doble espacio: errata corregida
       personas: 'Para 2 a 4 personas',
       texto: 'Una merienda para dos personas con dango tricolor, taiyaki relleno y mochis. La bebida\nte la dejamos a elección.\nPensada para la tarde larga con amigos.',
       foto: { src: 'exp-merienda.webp', alt: 'Mochis de colores sobre una bandeja negra junto a una taza de té' },
@@ -247,7 +247,7 @@ export const experienciasPage = {
   ],
   testimonios: {
     titulo: 'Así vivieron Kumamori',
-    texto: 'Descubrí qué dicen quienes ya pasaron por Kumamori y compartieron alguna de nuestras experiencias.',
+    texto: 'Descubrí qué dicen quienes ya pasaron por Kumamori y compartieron\nalguna de nuestras experiencias.',
     items: [
       {
         nombre: 'Martina S.',
