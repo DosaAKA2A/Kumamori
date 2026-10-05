@@ -141,7 +141,7 @@ export const reservasPage = {
 }
 
 export const formulario = {
-  titulo: 'Reservar un lugar es muy simple',
+  titulo: 'Reservar un\nlugar es\nmuy simple',
   texto: 'Y sin costo. Te guardamos el lugar hasta 15 minutos después del horario elegido.',
   condiciones: [
     'Las reservas están sujetas a disponibilidad.',
@@ -168,13 +168,13 @@ export const formulario = {
   },
   salir: {
     titulo: '¿Querés salir?',
-    texto: 'Tenés datos sin guardar en el formulario. Si salís ahora, vas a perder la información que ingresaste.',
+    texto: 'Tenés datos sin guardar en el formulario.\nSi salís ahora, vas a perder la información\nque ingresaste.',
     pregunta: '¿Querés salir de todos modos?',
     seguir: 'Continuar reservando',
     salir: 'Salir',
   },
   confirmacion: {
-    titulo: '¡Tu lugar ya está guardado!',
+    titulo: '¡Tu lugar ya\nestá guardado!',
     texto: ['Mostrá este código al llegar.', 'Guardalo o ', 'agregalo a tu calendario', ':', 'por ahora no enviamos correos.'],
     filas: {
       nombre: 'A Nombre de',

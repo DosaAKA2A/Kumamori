@@ -6,14 +6,12 @@ export type Reserva = {
   nombre: string
   correo: string
   telefono: string
-  motivo: string
   espacio: string
   personas: string
   duracion: string
   extra: string
   fecha: string // YYYY-MM-DD
   hora: string // HH:MM
-  notas: string
 }
 
 const KEY = 'km-reservas'
