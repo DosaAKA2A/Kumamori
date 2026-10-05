@@ -282,7 +282,7 @@ export const nosotrosPage = {
   sub: 'Kuma es oso. Mori es bosque.',
   parrafos: [
     'Kumamori nace de una idea simple: faltaban lugares cómodos para estudiar y trabajar fuera de casa, y sobraban ganas de un buen matcha. Así que juntamos las dos cosas en un espacio cálido, tranquilo y con inspiración japonesa.',
-    'Queremos que la concentración, el bienestar y el encuentro convivan en la misma mesa. Que se pueda venir a rendir un final, a cerrar un proyecto o a no hacer nada, y que el café siempre esté a la altura.',
+    'Queremos que la concentración, el bienestar y el encuentro convivan en la misma mesa. Que se pueda venir a rendir un final, a cerrar\nun proyecto o a no hacer nada, y que el café siempre esté a la altura.',
   ],
   cierre: 'El oso cuida el bosque. Nosotros cuidamos cada visita.',
   valores: ['Tranquilidad', 'Calidez', 'Encuentro', 'Experiencia'],
@@ -306,7 +306,7 @@ export const nosotrosPage = {
     ],
   },
   redes: {
-    titulo: 'Y seguinos en nuestras redes',
+    titulo: 'Y seguinos en\nnuestras redes',
     texto: 'Así te enterás de **todas** las novedades.',
   },
 }

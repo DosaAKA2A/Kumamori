@@ -9,6 +9,12 @@ export const ICONOS_MASCARA = {
   reloj: [42, 42],
   taza: [42, 36],
   sillon: [48, 36],
+  pin: [40, 56],
+  'reloj-contacto': [56, 56],
+  tren: [48, 56],
+  instagram: [60, 60],
+  tiktok: [52, 60],
+  whatsapp: [60, 60],
 } as const
 
 export type NombreIcono = keyof typeof ICONOS_MASCARA
