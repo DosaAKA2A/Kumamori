@@ -1,18 +1,18 @@
 import { useState, type FormEvent } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { footer, nav, site } from '../../content/site'
-import { Kana } from '../../brand/Logo'
-import { TLink } from './Transition'
+import { footer, site } from '../../content/site'
+import { Rich } from '../ui/Rich'
 
+/** Pie de la maqueta: boletín a la izquierda; marca, dirección, horario y correo alineados a la derecha. */
 export function Footer() {
   const [estado, setEstado] = useState<'idle' | 'ok'>('idle')
+  const n = footer.novedades
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const data = new FormData(e.currentTarget)
-    const correo = String(data.get('correo') ?? '')
     try {
-      localStorage.setItem('km-novedades', correo)
+      localStorage.setItem('km-novedades', String(data.get('correo') ?? ''))
     } catch {
       /* nada */
     }
@@ -20,74 +20,62 @@ export function Footer() {
   }
 
   return (
-    <footer className="on-bark relative overflow-hidden bg-bark text-cream">
-      <div className="wrap grid gap-12 py-16 md:grid-cols-12 md:py-24">
-        <div className="md:col-span-6">
-          <h2 className="t-h3">{footer.novedades.titulo}</h2>
-          <p className="mt-2 max-w-md text-cream/75">{footer.novedades.texto}</p>
-          <AnimatePresence mode="wait" initial={false}>
-            {estado === 'ok' ? (
-              <motion.p
-                key="ok"
-                className="note mt-6 text-2xl text-matcha"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
-                {footer.novedades.gracias}
-              </motion.p>
-            ) : (
-              <motion.form
-                key="form"
-                onSubmit={onSubmit}
-                className="mt-6 flex max-w-md flex-col gap-3 sm:flex-row"
-                exit={{ opacity: 0, y: -8 }}
-              >
-                <label className="sr-only" htmlFor="novedades-correo">
-                  Correo
-                </label>
-                <input
-                  id="novedades-correo"
-                  name="correo"
-                  type="email"
-                  required
-                  placeholder={footer.novedades.placeholder}
-                  className="input flex-1 border-cream/20 bg-cream/10 text-cream placeholder:text-cream/45 focus:bg-cream/15 focus:text-cream"
-                />
-                <button type="submit" className="btn">
-                  {footer.novedades.boton}
-                </button>
-              </motion.form>
-            )}
-          </AnimatePresence>
+    <footer className="bg-bark text-cream">
+      <div className="frame wrap-m flex flex-col gap-10 py-12 dk:block dk:uh-304 dk:py-0">
+        <div className="dk:absolute dk:ux-87 dk:uy-53">
+          <h2 className="text-[1.375rem] font-bold leading-none dk:ut-25">{n.titulo}</h2>
+          <p className="mt-4 text-[0.875rem] font-medium leading-[1.33] dk:umt-22 dk:ut-15">
+            <Rich text={n.texto} />
+          </p>
         </div>
+        <AnimatePresence mode="wait" initial={false}>
+          {estado === 'ok' ? (
+            <motion.p
+              key="ok"
+              className="hand text-2xl text-matcha dk:absolute dk:ux-87 dk:uy-170 dk:ut-30"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              {n.gracias}
+            </motion.p>
+          ) : (
+            <motion.form
+              key="form"
+              onSubmit={onSubmit}
+              className="-mt-4 flex gap-2 dk:absolute dk:ux-87 dk:uy-159 dk:mt-0 dk:ugap-8"
+              exit={{ opacity: 0, y: -8 }}
+            >
+              <label className="sr-only" htmlFor="novedades-correo">
+                Correo
+              </label>
+              <input
+                id="novedades-correo"
+                name="correo"
+                type="email"
+                required
+                placeholder={n.placeholder}
+                className="h-[52px] min-w-0 flex-1 rounded-[13px] bg-cream px-4 text-[0.9375rem] text-bark outline-none transition-shadow placeholder:text-bark/70 focus:shadow-[0_0_0_3px_var(--color-matcha)] dk:uh-60 dk:uw-250 dk:flex-none dk:urad-15 dk:upx-20 dk:ut-15"
+              />
+              <button
+                type="submit"
+                className="h-[52px] shrink-0 cursor-pointer rounded-full bg-matcha px-6 text-[0.9375rem] font-bold text-bark transition-colors hover:bg-cream dk:uh-60 dk:uw-140 dk:px-0 dk:ut-15"
+              >
+                {n.boton}
+              </button>
+            </motion.form>
+          )}
+        </AnimatePresence>
 
-        <div className="grid gap-8 sm:grid-cols-2 md:col-span-6 md:justify-items-end md:text-right">
-          <div className="text-[0.95rem] leading-relaxed text-cream/75">
-            <p className="font-bold text-cream">
-              © {site.anio} {site.nombre}
-            </p>
+        <div className="text-[1.0625rem] leading-[1.3] dk:absolute dk:ur-87 dk:uy-0 dk:text-right dk:ut-20">
+          <p className="font-bold dk:absolute dk:right-0 dk:uy-53 dk:whitespace-nowrap">{footer.marca}</p>
+          <div className="mt-4 dk:absolute dk:right-0 dk:uy-137 dk:mt-0 dk:whitespace-nowrap">
             <p>{site.direccion}</p>
             <p>{site.horario.texto}</p>
-            <a className="underline underline-offset-4 hover:text-matcha" href={`mailto:${site.correo}`}>
+            <a className="font-semibold underline decoration-1 underline-offset-[3px] transition-colors hover:text-matcha" href={`mailto:${site.correo}`}>
               {site.correo}
             </a>
           </div>
-          <nav className="flex flex-col gap-1 text-[0.95rem] md:items-end" aria-label="Secundaria">
-            {nav.map((l) => (
-              <TLink key={l.to} to={l.to} className="w-fit underline-offset-4 hover:underline">
-                {l.label}
-              </TLink>
-            ))}
-            {site.redes.map((r) => (
-              <a key={r.nombre} href={r.url} target="_blank" rel="noreferrer" className="w-fit underline-offset-4 hover:underline">
-                {r.nombre}
-              </a>
-            ))}
-          </nav>
         </div>
-      </div>
-      <div className="wrap pointer-events-none" aria-hidden>
-        <Kana className="h-auto w-full translate-y-[38%] text-cream/[0.07]" />
       </div>
     </footer>
   )

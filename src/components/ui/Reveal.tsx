@@ -4,7 +4,7 @@ import clsx from 'clsx'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
-const maskCls = 'inline-block overflow-hidden align-top leading-[1.1] -my-[0.09em] px-[0.02em]'
+const maskCls = 'inline-block overflow-hidden align-top leading-[1.1] -my-[0.05em] -mx-[0.03em] px-[0.03em]'
 
 type WordsProps = {
   text: string
@@ -22,23 +22,31 @@ export function Words({ text, as = 'h2', className, delay = 0, onView = true, pl
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref, { once: true, margin: '0px 0px -8% 0px' })
   const show = onView ? inView : play
-  const words = text.split(' ')
-  const children = words.map((w, i) => (
-    <Fragment key={i}>
-      <span className={maskCls}>
+  // "\n" marca un salto de la maqueta: solo se aplica en la composición de escritorio
+  const tokens = text.split(/( |\n)/).filter((t) => t !== '')
+  let k = 0
+  const children = tokens.map((t, i) =>
+    t === ' ' ? (
+      <Fragment key={i}> </Fragment>
+    ) : t === '\n' ? (
+      <Fragment key={i}>
+        <br className="hidden dk:inline" />
+        <span className="dk:hidden"> </span>
+      </Fragment>
+    ) : (
+      <span key={i} className={maskCls}>
         <motion.span
           className="inline-block"
           initial={{ y: '112%' }}
           animate={show ? { y: 0 } : { y: '112%' }}
-          transition={{ duration: 0.9, ease: EASE, delay: delay + i * 0.045 }}
+          transition={{ duration: 0.9, ease: EASE, delay: delay + k++ * 0.045 }}
         >
-          {w}
+          {t}
         </motion.span>
       </span>
-      {i < words.length - 1 ? ' ' : null}
-    </Fragment>
-  ))
-  return createElement(as, { ref, className, 'aria-label': text }, children)
+    ),
+  )
+  return createElement(as, { ref, className, 'aria-label': text.replace(/\n/g, ' ') }, children)
 }
 
 type LinesProps = {

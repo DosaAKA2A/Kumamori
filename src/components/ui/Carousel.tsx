@@ -3,7 +3,8 @@ import { AnimatePresence, motion, useInView, useReducedMotion } from 'motion/rea
 import clsx from 'clsx'
 import { photo } from '../../lib/hooks'
 
-type Foto = { src: string; alt: string }
+/** escala y origen opcionales: reproducen el encuadre exacto de la foto en la maqueta */
+type Foto = { src: string; alt: string; escala?: number; origen?: string }
 type Props = {
   fotos: Foto[]
   className?: string
@@ -60,8 +61,9 @@ export function Carousel({ fotos, className, interval = 5000, overlay, dots = tr
           src={photo(f.src)}
           alt={f.alt}
           className="absolute inset-0 h-full w-full object-cover"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, scale: reduced ? 1 : [1.03, 1.1] }}
+          style={{ transformOrigin: f.origen ?? '50% 50%' }}
+          initial={{ opacity: 0, scale: f.escala ?? 1 }}
+          animate={{ opacity: 1, scale: reduced ? (f.escala ?? 1) : [f.escala ?? 1, (f.escala ?? 1) * 1.05] }}
           exit={{ opacity: 0 }}
           transition={{
             opacity: { duration: 1.1, ease: 'easeInOut' },

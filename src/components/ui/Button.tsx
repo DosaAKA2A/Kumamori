@@ -3,22 +3,33 @@ import { motion, useMotionValue, useReducedMotion, useSpring } from 'motion/reac
 import clsx from 'clsx'
 import { TLink } from '../layout/Transition'
 
+type Size = 'xl' | 'md' | 'resumen'
+
+// Medidas de la maqueta: el "Reservar" grande (300 x 100, Bold 40), el del héroe (200 x 70)
+// y el del panel RESUMEN (286 x 100, verde oscuro).
+const SIZES: Record<Size, string> = {
+  xl: 'h-16 px-10 text-[1.6rem] font-bold rounded-full dk:uw-300 dk:uh-100 dk:px-0 dk:ut-40',
+  md: 'h-[52px] px-8 text-[1.0625rem] font-semibold rounded-full dk:uw-200 dk:uh-70 dk:px-0 dk:ut-20',
+  resumen: 'h-14 px-10 text-[1.375rem] font-semibold rounded-full dk:uw-286 dk:uh-100 dk:px-0 dk:ut-35',
+}
+const VARIANTS: Record<Size, string> = {
+  xl: 'bg-matcha text-bark hover:bg-matcha-deep hover:text-cream',
+  md: 'bg-matcha text-bark hover:bg-matcha-deep hover:text-cream',
+  resumen: 'bg-matcha-deep text-cream hover:bg-bark',
+}
+
 type Props = {
   children: ReactNode
   to?: string
-  href?: string
   type?: 'button' | 'submit'
-  variant?: 'solid' | 'ghost'
-  size?: 'sm' | 'md' | 'lg'
+  size?: Size
   className?: string
   disabled?: boolean
   onClick?: () => void
-  onHoverStart?: () => void
-  onHoverEnd?: () => void
 }
 
-/** Botón píldora con un imán suave: se inclina hacia el puntero cuando está cerca. */
-export function Button({ children, to, href, type = 'button', variant = 'solid', size = 'md', className, disabled, onClick, onHoverStart, onHoverEnd }: Props) {
+/** Botón píldora de la maqueta con un imán suave: se inclina hacia el puntero y vuelve a su sitio al salir. */
+export function Button({ children, to, type = 'button', size = 'md', className, disabled, onClick }: Props) {
   const ref = useRef<HTMLSpanElement>(null)
   const reduced = useReducedMotion()
   const mx = useMotionValue(0)
@@ -27,38 +38,18 @@ export function Button({ children, to, href, type = 'button', variant = 'solid',
   const y = useSpring(my, { stiffness: 220, damping: 16, mass: 0.5 })
 
   const onMove = (e: PointerEvent<HTMLSpanElement>) => {
-    if (reduced || disabled || !ref.current) return
+    if (reduced || disabled || !ref.current || e.pointerType !== 'mouse') return
     const r = ref.current.getBoundingClientRect()
-    mx.set((e.clientX - (r.left + r.width / 2)) * 0.22)
-    my.set((e.clientY - (r.top + r.height / 2)) * 0.32)
-  }
-  const reset = () => {
-    mx.set(0)
-    my.set(0)
+    mx.set((e.clientX - (r.left + r.width / 2)) * 0.12)
+    my.set((e.clientY - (r.top + r.height / 2)) * 0.2)
   }
 
-  const cls = clsx('btn', variant === 'ghost' && 'btn-ghost', size === 'sm' && 'btn-sm', size === 'lg' && 'btn-lg', className)
-
-  let inner: ReactNode
-  if (to) {
-    inner = (
-      <TLink to={to} className={cls} onClick={onClick}>
-        {children}
-      </TLink>
-    )
-  } else if (href) {
-    inner = (
-      <a href={href} className={cls} target="_blank" rel="noreferrer" onClick={onClick}>
-        {children}
-      </a>
-    )
-  } else {
-    inner = (
-      <button type={type} className={cls} disabled={disabled} onClick={onClick}>
-        {children}
-      </button>
-    )
-  }
+  const cls = clsx(
+    'inline-flex items-center justify-center whitespace-nowrap leading-none transition-colors duration-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60',
+    SIZES[size],
+    VARIANTS[size],
+    className,
+  )
 
   return (
     <motion.span
@@ -67,13 +58,20 @@ export function Button({ children, to, href, type = 'button', variant = 'solid',
       style={{ x, y }}
       onPointerMove={onMove}
       onPointerLeave={() => {
-        reset()
-        onHoverEnd?.()
+        mx.set(0)
+        my.set(0)
       }}
-      onPointerEnter={onHoverStart}
       whileTap={disabled ? undefined : { scale: 0.96 }}
     >
-      {inner}
+      {to ? (
+        <TLink to={to} className={cls} onClick={onClick}>
+          {children}
+        </TLink>
+      ) : (
+        <button type={type} className={cls} disabled={disabled} onClick={onClick}>
+          {children}
+        </button>
+      )}
     </motion.span>
   )
 }
