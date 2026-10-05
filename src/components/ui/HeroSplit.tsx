@@ -14,6 +14,7 @@ type Props = {
 /**
  * Héroe de Nuestro espacio y Reservas: texto a la izquierda y foto a sangre por la derecha
  * (940 x 700 desde y 0, por debajo de la barra, con radio 30 a la izquierda).
+ * El recorte empieza en y 82: lo de arriba queda siempre tapado por la barra.
  */
 export function HeroSplit({ titulo, texto, boton, foto, oscuro }: Props) {
   return (
@@ -26,9 +27,9 @@ export function HeroSplit({ titulo, texto, boton, foto, oscuro }: Props) {
           <img
             src={photo(foto.src)}
             alt={foto.alt}
-            className="absolute inset-0 h-full w-full object-cover object-left"
+            className="absolute inset-0 h-full w-full object-cover object-left dk:inset-auto dk:left-0 dk:uy-82 dk:uh-618"
             width={940}
-            height={700}
+            height={618}
             fetchPriority="high"
           />
         </Fade>
