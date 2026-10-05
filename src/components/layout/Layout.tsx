@@ -53,7 +53,6 @@ export function Layout() {
             <Footer />
           </IntroProvider>
         </TransitionProvider>
-        <div className="grain" aria-hidden />
       </MotionConfig>
     </ReactLenis>
   )

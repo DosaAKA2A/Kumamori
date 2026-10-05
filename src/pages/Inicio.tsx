@@ -1,189 +1,88 @@
 import { motion } from 'motion/react'
-import { home, menu } from '../content/site'
+import { home } from '../content/site'
 import { LivingImagotipo } from '../brand/Bear'
-import { BrandIcon } from '../brand/Icon'
 import { Words, Fade } from '../components/ui/Reveal'
 import { Watermarks } from '../components/ui/Watermarks'
 import { IconBand } from '../components/ui/IconBand'
-import { Button } from '../components/ui/Button'
-import { DragStrip } from '../components/ui/DragStrip'
 import { Carousel } from '../components/ui/Carousel'
-import { PhotoBand } from '../components/ui/PhotoBand'
-import { SectionHead } from '../components/ui/Section'
 import { TLink } from '../components/layout/Transition'
 import { useIntroDone } from '../components/layout/Intro'
 import { photo } from '../lib/hooks'
 
 export function Inicio() {
-  const cta = home.cta
   return (
     <>
       <Hero />
       <IconBand />
-      <ElEspacio />
-      <Barra />
-      <Quedarse />
-      <PhotoBand src={cta.foto} overlay="linear-gradient(rgba(48,36,29,0.45), rgba(48,36,29,0.72))" className="on-bark text-cream">
-        <div className="wrap py-28 text-center md:py-44">
-          <Words text={cta.titulo} className="display t-h1" />
-          <p className="lead mx-auto mt-5 max-w-lg text-cream/90">{cta.texto}</p>
-          <div className="mt-9">
-            <Button to={cta.boton.to} size="lg">
-              {cta.boton.label}
-            </Button>
-          </div>
-        </div>
-      </PhotoBand>
+      <Lugar />
     </>
   )
 }
 
-/* ---------- Hero de la maqueta: carrusel a pantalla completa + logo vivo encima ---------- */
 const EASE = [0.16, 1, 0.3, 1] as const
 
+/* Héroe de la maqueta: carrusel a pantalla completa, velo marrón al 50 % y el imagotipo crema con el oso vivo. */
 function Hero() {
   const done = useIntroDone()
-  const h = home.hero
   return (
-    <section className="on-green relative min-h-[100svh] overflow-hidden bg-bark text-cream">
-      <Carousel
-        fotos={h.fotos}
-        className="absolute inset-0"
-        overlay="linear-gradient(rgba(48,36,29,0.5) 0%, rgba(48,36,29,0.32) 30%, rgba(48,36,29,0.42) 60%, rgba(48,36,29,0.68) 100%)"
-      />
-      {/* luz suave detrás del logo para que el crema respire sobre cualquier foto */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{ background: 'radial-gradient(ellipse 46% 44% at 50% 44%, rgba(48,36,29,0.45), transparent 72%)' }}
-        aria-hidden
-      />
-      <div className="wrap pointer-events-none relative z-10 flex min-h-[100svh] flex-col items-center justify-center gap-12 pb-24 pt-[86px] text-center">
+    <section className="relative h-[100svh] min-h-[560px] overflow-hidden bg-bark text-cream dk:h-auto dk:min-h-0 dk:uh-1118">
+      <Carousel fotos={home.hero.fotos} className="absolute inset-0" overlay="rgba(48, 36, 29, 0.5)" dots={false} />
+      <div className="frame pointer-events-none relative z-10 flex h-full items-center justify-center pt-16 dk:block dk:pt-0">
         <motion.div
-          className="pointer-events-auto"
+          className="pointer-events-auto dk:absolute dk:ux-608 dk:uy-282"
           initial={{ opacity: 0, scale: 0.94, y: 16 }}
           animate={done ? { opacity: 1, scale: 1, y: 0 } : {}}
           transition={{ duration: 1, ease: EASE, delay: 0.1 }}
         >
-          <LivingImagotipo className="h-[min(44svh,430px)] w-auto text-cream drop-shadow-[0_12px_44px_rgba(48,36,29,0.6)]" title="Kumamori" />
-        </motion.div>
-        <motion.div
-          className="pointer-events-auto flex flex-wrap justify-center gap-3"
-          initial={{ opacity: 0, y: 16 }}
-          animate={done ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.9, ease: EASE, delay: 0.5 }}
-        >
-          <Button to={h.primario.to} size="lg">
-            {h.primario.label}
-          </Button>
-          <Button to={h.secundario.to} size="lg" variant="ghost">
-            {h.secundario.label}
-          </Button>
+          <LivingImagotipo stretch className="aspect-[513/545] h-auto w-[min(62vw,300px)] text-cream dk:uw-513 dk:uh-550" title="Kumamori" />
         </motion.div>
       </div>
     </section>
   )
 }
 
-/* ---------- Imagen estática + texto (segunda sección de la maqueta) ---------- */
-function ElEspacio() {
-  const e = home.espacio
+/* "Un lugar tranquilo para vos": foto de matcha a sangre por la izquierda y texto a la derecha. */
+function Lugar() {
+  const l = home.lugar
   return (
-    <section className="relative bg-cream text-bark">
-      <Watermarks
-        marcas={[
-          { icono: 'cha', className: 'right-[4%] top-[10%] w-36 rotate-6 opacity-[0.06]' },
-          { icono: 'sprig', className: 'bottom-[8%] right-[7%] w-52 -rotate-12 opacity-[0.05]' },
-        ]}
-      />
-      <div className="grid md:min-h-[78vh] md:grid-cols-2">
-        <Fade className="relative min-h-[48svh] md:min-h-0">
+    <section className="relative overflow-hidden bg-cream text-bark">
+      <div className="frame dk:uh-1080">
+        <Watermarks
+          marcas={[
+            { icono: 'chasen', x: 1486, y: 390, h: 422, rot: -5 },
+            { icono: 'bun', x: 1181, y: 882, h: 254, rot: 20 },
+            { icono: 'flower-hatched', x: 1557, y: 878, h: 219, rot: 45 },
+          ]}
+        />
+        <Fade y={0} className="relative aspect-[4/5] max-h-[70svh] w-full overflow-hidden rounded-br-[24px] sm:aspect-[16/11] dk:absolute dk:uy-0 dk:aspect-auto dk:max-h-none dk:uh-1080 dk:urbr-30 dk:[left:calc(-1*var(--gut))] dk:[width:calc(892*var(--u)+var(--gut))]">
           <img
-            src={photo(e.foto.src)}
-            alt={e.foto.alt}
-            className="absolute inset-0 h-full w-full object-cover md:rounded-r-[2.5rem]"
+            src={photo(l.foto.src)}
+            alt={l.foto.alt}
+            className="absolute inset-0 h-full w-full object-cover object-right"
+            width={892}
+            height={1080}
             loading="lazy"
-            width={1800}
-            height={1200}
           />
         </Fade>
-        <div className="flex items-center">
-          <div className="max-w-xl px-[clamp(1.25rem,5vw,5rem)] py-14 md:py-24">
-            <SectionHead titulo={e.titulo} />
-            {e.parrafos.map((par) => (
-              <p key={par.slice(0, 20)} className="lead mt-6 opacity-85">
-                {par}
+        <div className="wrap-m relative py-14 dk:static dk:py-0">
+          <Words
+            text={l.titulo}
+            className="display text-[clamp(2.75rem,11vw,4rem)] dk:absolute dk:ux-978 dk:uy-170 dk:uw-774 dk:ut-90"
+          />
+          <Fade className="mt-6 text-[1.125rem] leading-[1.32] dk:absolute dk:ux-978 dk:uy-470 dk:uw-511 dk:mt-0 dk:ut-25">
+            {l.parrafos.map((p, i) => (
+              <p key={i} className={i ? 'mt-[1.32em]' : undefined}>
+                {p}
               </p>
             ))}
-            <TLink
-              to={e.link.to}
-              className="mt-8 inline-block font-bold text-matcha-deep underline decoration-2 underline-offset-[6px] transition-colors hover:decoration-matcha"
-            >
-              {e.link.label}
-            </TLink>
-          </div>
+          </Fade>
+          <TLink
+            to={l.link.to}
+            className="mt-6 inline-block text-[1.0625rem] font-medium text-matcha-deep underline decoration-1 underline-offset-[0.3em] transition-colors hover:text-bark dk:absolute dk:ux-979 dk:uy-824 dk:mt-0 dk:ut-20"
+          >
+            {l.link.label}
+          </TLink>
         </div>
-      </div>
-    </section>
-  )
-}
-
-/* ---------- Hoy en la barra (tira arrastrable) ---------- */
-function Barra() {
-  const b = home.barra
-  return (
-    <section className="on-green bg-matcha-deep text-cream">
-      <div className="wrap pt-20 md:pt-28">
-        <SectionHead titulo={b.titulo} texto={b.texto} />
-      </div>
-      <div className="wrap">
-        <DragStrip className="-mx-[var(--pad)] px-[var(--pad)] pb-20 pt-12 md:pb-28">
-          {menu.map((item) => (
-            <article
-              key={item.nombre}
-              tabIndex={0}
-              className="w-[260px] shrink-0 rounded-sticker bg-cream/10 p-6 transition-colors hover:bg-cream/15 focus:bg-cream/15 md:w-[300px] md:p-7"
-            >
-              <BrandIcon name={item.icono} className="h-24 w-28 text-cream" />
-              <h3 className="t-h3 mt-7">{item.nombre}</h3>
-              <p className="mt-2 text-[0.98rem] text-cream/80">{item.texto}</p>
-              {item.precio && <p className="note mt-4 text-2xl text-matcha">{item.precio}</p>}
-            </article>
-          ))}
-          <div className="w-[var(--pad)] shrink-0" aria-hidden />
-        </DragStrip>
-      </div>
-    </section>
-  )
-}
-
-/* ---------- Para quedarse ---------- */
-function Quedarse() {
-  const q = home.quedarse
-  return (
-    <section className="relative bg-cream text-bark">
-      <Watermarks
-        marcas={[
-          { icono: 'teacup', className: '-bottom-6 left-[42%] w-44 rotate-12 opacity-[0.05]' },
-          { icono: 'flower-five', className: 'left-[2%] top-[8%] w-28 -rotate-12 opacity-[0.06]' },
-        ]}
-      />
-      <div className="wrap grid items-center gap-12 py-20 md:grid-cols-12 md:py-32">
-        <div className="md:col-span-6">
-          <Words text={q.titulo} className="display t-h2" />
-          <dl className="mt-10 grid gap-8 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3">
-            {q.datos.map((d) => (
-              <div key={d.titulo}>
-                <dt className="t-h3 text-matcha-deep">{d.titulo}</dt>
-                <dd className="mt-2 text-[0.98rem] opacity-80">{d.texto}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-        <Fade className="md:col-span-6 lg:col-span-5 lg:col-start-8" delay={0.1}>
-          <div className="sticker rotate-2 transition-transform duration-700 ease-[var(--ease-expo)] hover:rotate-0">
-            <img src={photo(q.foto.src)} alt={q.foto.alt} width={1800} height={1200} loading="lazy" />
-          </div>
-        </Fade>
       </div>
     </section>
   )

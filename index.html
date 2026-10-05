@@ -11,6 +11,21 @@
     <meta property="og:title" content="Kumamori · Café, matcha y un lugar para quedarse" />
     <meta property="og:description" content="Cafetería inspirada en Japón para disfrutar, estudiar o trabajar sin mirar el reloj." />
     <meta property="og:type" content="website" />
+    <script>
+      // Escala de la maqueta (1728 px de ancho): 1 u = ancho útil / 1728, como mucho 1 px.
+      (function () {
+        var d = document.documentElement
+        function fit() {
+          var w = d.clientWidth || window.innerWidth
+          d.style.setProperty('--u', Math.min(1, w / 1728) + 'px')
+          d.style.setProperty('--gut', Math.max(0, (w - 1728) / 2) + 'px')
+          d.style.setProperty('--ws', String(Math.max(1, w / 1728)))
+        }
+        fit()
+        window.addEventListener('resize', fit)
+        if (window.ResizeObserver) new ResizeObserver(fit).observe(d)
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

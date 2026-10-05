@@ -100,7 +100,7 @@ export function Bear({ className, track = true, mood = 'idle', reach = 7, title 
  * El imagotipo completo (oso + クマモリ + KUMAMORI) con los ojos vivos.
  * Es el "LOGO TRANSPARENTE" del hero de la maqueta: se pinta con currentColor.
  */
-export function LivingImagotipo({ className, title, outline = 0 }: { className?: string; title?: string; outline?: number }) {
+export function LivingImagotipo({ className, title, outline = 0, stretch = false }: { className?: string; title?: string; outline?: number; stretch?: boolean }) {
   const ref = useRef<SVGSVGElement>(null)
   // los ojos quedan a ~1/4 de la altura del imagotipo
   const { ex, ey, blink } = useEyes(ref, { reach: 6, unitW: imagotipo.w, centerY: 0.25 })
@@ -111,7 +111,7 @@ export function LivingImagotipo({ className, title, outline = 0 }: { className?:
     : {}
 
   return (
-    <svg ref={ref} viewBox={`0 0 ${imagotipo.w} ${imagotipo.h}`} className={clsx('overflow-visible', className)} fill="currentColor" role={title ? 'img' : undefined} aria-hidden={title ? undefined : true}>
+    <svg ref={ref} viewBox={`0 0 ${imagotipo.w} ${imagotipo.h}`} preserveAspectRatio={stretch ? 'none' : undefined} className={clsx('overflow-visible', className)} fill="currentColor" role={title ? 'img' : undefined} aria-hidden={title ? undefined : true}>
       {title && <title>{title}</title>}
       {paths.map((p, k) =>
         k === 3 || k === 4 ? null : <path key={k} d={p.d} fillRule={p.eo ? 'evenodd' : undefined} {...troquel} />,

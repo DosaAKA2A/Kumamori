@@ -4,9 +4,12 @@ import { animate, useReducedMotion } from 'motion/react'
 import { useLenis } from 'lenis/react'
 import { Kana } from '../../brand/Logo'
 
-type Ctx = { go: (to: string) => void }
-const TransitionCtx = createContext<Ctx>({ go: () => {} })
+/** Un guardia puede frenar la navegación (p. ej. el formulario con datos sin guardar): devuelve true si la frena. */
+type Guard = (to: string) => boolean
+type Ctx = { go: (to: string, force?: boolean) => void; setGuard: (g: Guard | null) => void }
+const TransitionCtx = createContext<Ctx>({ go: () => {}, setGuard: () => {} })
 export const useGo = () => useContext(TransitionCtx).go
+export const useSetGuard = () => useContext(TransitionCtx).setGuard
 
 const WIPE = [0.83, 0, 0.17, 1] as const
 
@@ -22,10 +25,15 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
   const panel = useRef<HTMLDivElement>(null)
   const logo = useRef<HTMLDivElement>(null)
   const busy = useRef(false)
+  const guard = useRef<Guard | null>(null)
+  const setGuard = useCallback((g: Guard | null) => {
+    guard.current = g
+  }, [])
 
   const go = useCallback(
-    async (to: string) => {
+    async (to: string, force = false) => {
       if (busy.current) return
+      if (!force && guard.current?.(to)) return
       const [path, search = ''] = to.split('?')
       if (path === location.pathname && search === location.search.replace(/^\?/, '')) {
         lenis?.scrollTo(0)
@@ -60,7 +68,7 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
   )
 
   return (
-    <TransitionCtx.Provider value={{ go }}>
+    <TransitionCtx.Provider value={{ go, setGuard }}>
       {children}
       <div
         ref={panel}
